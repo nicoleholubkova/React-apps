@@ -30,6 +30,7 @@
         "source.fixAll.eslint": true
     },
     "cSpell.words": [
-        "ahoj"
+        "ahoj",
+        "keyof"
     ]
 }
