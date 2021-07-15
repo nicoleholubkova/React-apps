@@ -1,12 +1,12 @@
 import "./index.css";
-import { MyStateComp } from "./Root";
+import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
 const myComp = (
   <div>
-    <MyStateComp />
+    <App />
   </div>
 );
 ReactDOM.render(myComp, document.getElementById("root"));
