@@ -1,37 +1,47 @@
 import "./App.css";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MyStateComp } from "./counter/Root";
-import React from "react";
+import { ToDoList } from "./todo/ToDo";
+import styled from "styled-components";
+
+const DivWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px;
+`;
+
+const Paragraph = styled.p`
+  font-size: 180px;
+  text-align: center;
+`;
 
 export default function App() {
   return (
     <Router>
       <div>
         <nav>
-          <ul>
-            <li>
+          <DivWrapper>
+            <div>
               <Link to="/">Home</Link>
-            </li>
-            <li>
+            </div>
+            <div>
               <Link to="/counter">Counter</Link>
-            </li>
-            <li>
-              <Link to="/todo">To Do</Link>
-            </li>
-          </ul>
+            </div>
+            <div>
+              <Link to="/todo">To Do List</Link>
+            </div>
+          </DivWrapper>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/counter">
             <MyStateComp />
           </Route>
           <Route path="/todo">
-            <h2>There will be my to do list.</h2>
+            <ToDoList />
           </Route>
           <Route path="/">
-            <h1>Hi</h1>
+            <Paragraph>&#128144;</Paragraph>
           </Route>
         </Switch>
       </div>
