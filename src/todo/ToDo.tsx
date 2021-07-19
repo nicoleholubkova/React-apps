@@ -13,15 +13,6 @@ const InputCheckbox = styled.input`
 const DivWrapperItem = styled.div`
   padding: 13px;
 `;
-
-const DivWrapperLi = styled.div`
-  border-bottom: 1px solid #ededed;
-  font-size: 18px;
-  margin: -23px -13px 0 -14px;
-  padding-left: 13%;
-  padding-bottom: 2%;
-`;
-
 const Ul = styled.ul`
   padding-left: 0;
   display: inline;
@@ -57,18 +48,22 @@ const Input = styled.input`
   }
 `;
 
+const DivWrapperLi = styled.div<{ checked: boolean }>`
+  border-bottom: 1px solid #ededed;
+  font-size: 18px;
+  margin: -23px -13px 0 -14px;
+  padding-left: 13%;
+  padding-bottom: 2%;
+  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
+  color: ${(props) => (props.checked ? "#787878" : "black")};
+`;
+
 interface ToDoItem {
   index: number;
   value: string;
   done: boolean;
 }
 const toDoItems = [] as ToDoItem[];
-// toDoItems.push({
-//   index: 0,
-//   value: "laundry",
-//   done: false,
-// });
-
 class ToDoListItem extends React.Component<
   { item: ToDoItem; checkItemFn: any },
   {}
@@ -78,9 +73,9 @@ class ToDoListItem extends React.Component<
   }
 
   onChangeBox = (e) => {
-    debugger;
     this.props.checkItemFn(this.props.item);
   };
+
   render() {
     return (
       <DivWrapperItem>
@@ -89,7 +84,9 @@ class ToDoListItem extends React.Component<
           defaultChecked={this.props.item.done}
           onChange={this.onChangeBox}
         />
-        <DivWrapperLi>{this.props.item.value}</DivWrapperLi>
+        <DivWrapperLi checked={this.props.item.done}>
+          {this.props.item.value}
+        </DivWrapperLi>
       </DivWrapperItem>
     );
   }
@@ -127,7 +124,9 @@ class ToDoForm extends React.Component<{ addItem: any }, {}> {
     if (e.key === "Enter") {
       let newValue = e.target.value;
       // eslint-disable-next-line no-console
-      console.log("it is working");
+      if (!newValue) {
+        return;
+      }
       this.props.addItem(newValue);
       Array.from(document.querySelectorAll("input")).forEach(
         (input) => (input.value = "")
@@ -148,16 +147,29 @@ class ToDoForm extends React.Component<{ addItem: any }, {}> {
   }
 }
 
-export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
+export class ToDoApp extends React.Component<
+  {},
+  { toDoItems: ToDoItem[]; doneItemsCount: number }
+> {
   constructor(props) {
     super(props);
     this.state = {
       toDoItems: toDoItems,
+      doneItemsCount: toDoItems.length,
     };
   }
 
   checkItem = (item: ToDoItem) => {
     item.done = !item.done;
+    if (item.done) {
+      this.setState((prevState) => ({
+        doneItemsCount: prevState.doneItemsCount - 1,
+      }));
+    } else {
+      this.setState((prevState) => ({
+        doneItemsCount: prevState.doneItemsCount + 1,
+      }));
+    }
   };
 
   addItem = (newToDoText: string) => {
@@ -168,9 +180,9 @@ export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
     };
     this.setState((prevState) => ({
       toDoItems: [newToDo, ...prevState.toDoItems],
+      doneItemsCount: prevState.doneItemsCount + 1,
     }));
   };
-
   render() {
     return (
       <div>
@@ -178,8 +190,16 @@ export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
         <DiVWrapperApp>
           <ToDoForm addItem={this.addItem} />
           <ToDoList items={this.state.toDoItems} checkItemFn={this.checkItem} />
+          <DivCounter>Todos left: {this.state.doneItemsCount} </DivCounter>
         </DiVWrapperApp>
       </div>
     );
   }
 }
+
+const DivCounter = styled.div`
+  color: #777;
+  font-size: small;
+  padding-bottom: 10px;
+  padding-left: 10px;
+`;
