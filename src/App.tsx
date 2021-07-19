@@ -1,7 +1,8 @@
 import "./App.css";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MyStateComp } from "./counter/Root";
-import { ToDoList } from "./todo/ToDo";
+
+import { ToDoApp } from "./todo/ToDo";
 import styled from "styled-components";
 
 const DivWrapper = styled.div`
@@ -38,7 +39,7 @@ export default function App() {
             <MyStateComp />
           </Route>
           <Route path="/todo">
-            <ToDoList />
+            <ToDoApp />
           </Route>
           <Route path="/">
             <Paragraph>&#128144;</Paragraph>
