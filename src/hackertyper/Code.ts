@@ -1,5 +1,5 @@
-export const code = `
-struct group_info init_groups = { .usage = ATOMIC_INIT(2) };
+export const text = `
+ struct group_info init_groups = { .usage = ATOMIC_INIT(2) };
 
 struct group_info *groups_alloc(int gidsetsize){
 
@@ -8,8 +8,6 @@ struct group_info *groups_alloc(int gidsetsize){
 	int nblocks;
 
 	int i;
-
-
 
 	nblocks = (gidsetsize + NGROUPS_PER_BLOCK - 1) / NGROUPS_PER_BLOCK;
 
@@ -28,7 +26,6 @@ struct group_info *groups_alloc(int gidsetsize){
 	group_info->nblocks = nblocks;
 
 	atomic_set(&group_info->usage, 1);
-
 
 
 	if (gidsetsize <= NGROUPS_SMALL)
@@ -55,8 +52,7 @@ struct group_info *groups_alloc(int gidsetsize){
 
 	return group_info;
 
-
-
+	
 out_undo_partial_alloc:
 
 	while (--i >= 0) {
@@ -71,10 +67,7 @@ out_undo_partial_alloc:
 
 }
 
-
-
 EXPORT_SYMBOL(groups_alloc);
-
 
 
 void groups_free(struct group_info *group_info)
@@ -96,9 +89,7 @@ void groups_free(struct group_info *group_info)
 }
 
 
-
 EXPORT_SYMBOL(groups_free);
-
 
 
 /* export the group_info to a user-space array */
@@ -114,7 +105,6 @@ static int groups_to_user(gid_t __user *grouplist,
 	unsigned int count = group_info->ngroups;
 
 
-
 	for (i = 0; i < group_info->nblocks; i++) {
 
 		unsigned int cp_count = min(NGROUPS_PER_BLOCK, count);
@@ -122,11 +112,9 @@ static int groups_to_user(gid_t __user *grouplist,
 		unsigned int len = cp_count * sizeof(*grouplist);
 
 
-
 		if (copy_to_user(grouplist, group_info->blocks[i], len))
 
 			return -EFAULT;
-
 
 
 		grouplist += NGROUPS_PER_BLOCK;

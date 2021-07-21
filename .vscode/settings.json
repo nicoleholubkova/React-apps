@@ -34,10 +34,13 @@
         "NGROUPS",
         "Typer",
         "ahoj",
+        "component",
         "hackertyper",
         "keyof",
         "kmalloc",
         "nblocks",
-        "struct"
+        "struct",
+        "unmount",
+        "will"
     ]
 }

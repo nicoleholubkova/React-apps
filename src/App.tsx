@@ -4,12 +4,20 @@ import { MyStateComp } from "./counter/Root";
 
 import { HackerTyper } from "./hackertyper/HackerTyper";
 import { ToDoApp } from "./todo/ToDo";
+import { text } from "./hackertyper/Code";
 import styled from "styled-components";
 
 const DivWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 20px;
+  a {
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  a:hover {
+    color: red;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -46,7 +54,7 @@ export default function App() {
             <ToDoApp />
           </Route>
           <Route path="/hackertyper">
-            <HackerTyper />
+            <HackerTyper code={text} />
           </Route>
           <Route path="/">
             <Paragraph>&#128144;</Paragraph>
