@@ -93,7 +93,7 @@ class ToDoListItem extends React.Component<
 }
 
 class ToDoList extends React.Component<
-  { items: ToDoItem[]; checkItemFn: any },
+  { items: ToDoItem[]; checkItemFn: (item: ToDoItem) => void },
   {}
 > {
   constructor(props) {
@@ -116,9 +116,15 @@ class ToDoList extends React.Component<
   }
 }
 
-class ToDoForm extends React.Component<{ addItem: any }, {}> {
+class ToDoForm extends React.Component<
+  { addItem: (value: string) => void },
+  { inputValue: string }
+> {
   constructor(props) {
     super(props);
+    this.state = {
+      inputValue: "",
+    };
   }
   _handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -128,9 +134,7 @@ class ToDoForm extends React.Component<{ addItem: any }, {}> {
         return;
       }
       this.props.addItem(newValue);
-      Array.from(document.querySelectorAll("input")).forEach(
-        (input) => (input.value = "")
-      );
+      this.setState({ inputValue: "" });
     }
   };
   render() {
@@ -141,6 +145,8 @@ class ToDoForm extends React.Component<{ addItem: any }, {}> {
           placeholder="What needs to be done?"
           autoFocus
           onKeyDown={this._handleKeyDown}
+          value={this.state.inputValue}
+          onChange={(e) => this.setState({ inputValue: e.target.value })}
         />
       </DivWrapperInput>
     );
@@ -173,13 +179,15 @@ export class ToDoApp extends React.Component<
   };
 
   addItem = (newToDoText: string) => {
-    let newToDo: ToDoItem = {
-      index: this.state.toDoItems.length,
-      value: newToDoText,
-      done: false,
-    };
     this.setState((prevState) => ({
-      toDoItems: [newToDo, ...prevState.toDoItems],
+      toDoItems: [
+        {
+          index: prevState.toDoItems.length,
+          value: newToDoText,
+          done: false,
+        },
+        ...prevState.toDoItems,
+      ],
       doneItemsCount: prevState.doneItemsCount + 1,
     }));
   };
