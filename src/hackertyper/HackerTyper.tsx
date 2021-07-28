@@ -19,11 +19,10 @@ export class HackerTyper extends Component<{ code: string }, { cut: number }> {
   }
 
   onKeyPressed = (e) => {
-    if (e.key) {
-      this.setState((prevState) => ({
+    if (e.key)
+      return this.setState((prevState) => ({
         cut: prevState.cut + 4,
       }));
-    }
   };
 
   render() {

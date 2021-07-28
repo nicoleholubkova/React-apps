@@ -153,29 +153,29 @@ class ToDoForm extends React.Component<
   }
 }
 
-export class ToDoApp extends React.Component<
-  {},
-  { toDoItems: ToDoItem[]; doneItemsCount: number }
-> {
+export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
   constructor(props) {
     super(props);
     this.state = {
       toDoItems: toDoItems,
-      doneItemsCount: toDoItems.length,
     };
   }
 
+  numberOfToDosLeft = () => {
+    let toDosLeft = 0;
+    for (let i = 0; i < this.state.toDoItems.length; i++) {
+      let toDo = this.state.toDoItems[i];
+      if (!toDo.done) {
+        toDosLeft++;
+      }
+    }
+    return toDosLeft;
+  };
+
   checkItem = (item: ToDoItem) => {
     item.done = !item.done;
-    if (item.done) {
-      this.setState((prevState) => ({
-        doneItemsCount: prevState.doneItemsCount - 1,
-      }));
-    } else {
-      this.setState((prevState) => ({
-        doneItemsCount: prevState.doneItemsCount + 1,
-      }));
-    }
+    //když tu tento řádek nebyl, tak se nepřepočítával počet nehotových todo
+    this.setState((prevState) => ({}));
   };
 
   addItem = (newToDoText: string) => {
@@ -188,7 +188,6 @@ export class ToDoApp extends React.Component<
         },
         ...prevState.toDoItems,
       ],
-      doneItemsCount: prevState.doneItemsCount + 1,
     }));
   };
   render() {
@@ -198,7 +197,7 @@ export class ToDoApp extends React.Component<
         <DiVWrapperApp>
           <ToDoForm addItem={this.addItem} />
           <ToDoList items={this.state.toDoItems} checkItemFn={this.checkItem} />
-          <DivCounter>Todos left: {this.state.doneItemsCount} </DivCounter>
+          <DivCounter>Todos left: {this.numberOfToDosLeft()} </DivCounter>
         </DiVWrapperApp>
       </div>
     );
