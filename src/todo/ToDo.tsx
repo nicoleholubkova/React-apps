@@ -59,13 +59,14 @@ const DivWrapperLi = styled.div<{ checked: boolean }>`
 `;
 
 interface ToDoItem {
-  index: number;
+  id: number;
+  //index: number;
   value: string;
   done: boolean;
 }
 const toDoItems = [] as ToDoItem[];
 class ToDoListItem extends React.Component<
-  { item: ToDoItem; checkItemFn: any },
+  { item: ToDoItem; checkItemFn: (item: ToDoItem) => void },
   {}
 > {
   constructor(props) {
@@ -105,7 +106,7 @@ class ToDoList extends React.Component<
         <Ul>
           {this.props.items.map((todo) => (
             <ToDoListItem
-              key={todo.index}
+              key={todo.id}
               item={todo}
               checkItemFn={this.props.checkItemFn}
             />
@@ -166,16 +167,35 @@ export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
   };
 
   checkItem = (item: ToDoItem) => {
-    item.done = !item.done;
-    //když tu tento řádek nebyl, tak se nepřepočítával počet nehotových todo
-    this.setState((prevState) => ({}));
+    this.setState((prevState) => ({
+      toDoItems: prevState.toDoItems.map((todo) =>
+        todo.id === item.id ? { ...todo, done: !todo.done } : todo
+      ),
+    }));
+  };
+
+  getRandomId = () => {
+    let getId = () => {
+      return Math.round(Math.random() * 1000 + 1);
+    };
+
+    let idExists = (id) => {
+      return this.state.toDoItems.filter((todo) => todo.id === id).length > 0;
+    };
+
+    let newId = getId();
+
+    while (idExists(newId)) {
+      newId = getId();
+    }
+    return newId;
   };
 
   addItem = (newToDoText: string) => {
     this.setState((prevState) => ({
       toDoItems: [
         {
-          index: prevState.toDoItems.length,
+          id: this.getRandomId(),
           value: newToDoText,
           done: false,
         },
