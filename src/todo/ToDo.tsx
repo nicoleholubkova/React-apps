@@ -161,15 +161,8 @@ export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
     };
   }
 
-  numberOfToDosLeft = () => {
-    let toDosLeft = 0;
-    for (let i = 0; i < this.state.toDoItems.length; i++) {
-      let toDo = this.state.toDoItems[i];
-      if (!toDo.done) {
-        toDosLeft++;
-      }
-    }
-    return toDosLeft;
+  getNumberOfToDosLeft = () => {
+    return this.state.toDoItems.filter((todo) => !todo.done).length;
   };
 
   checkItem = (item: ToDoItem) => {
@@ -197,7 +190,7 @@ export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
         <DiVWrapperApp>
           <ToDoForm addItem={this.addItem} />
           <ToDoList items={this.state.toDoItems} checkItemFn={this.checkItem} />
-          <DivCounter>Todos left: {this.numberOfToDosLeft()} </DivCounter>
+          <DivCounter>Todos left: {this.getNumberOfToDosLeft()} </DivCounter>
         </DiVWrapperApp>
       </div>
     );
