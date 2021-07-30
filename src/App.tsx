@@ -3,7 +3,7 @@ import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MyStateComp } from "./counter/Root";
 
 import { HackerTyper } from "./hackertyper/HackerTyper";
-import { ToDoApp } from "./todo/ToDo";
+import { ToDoApp } from "./todo/ToDoApp";
 import { text } from "./hackertyper/Code";
 import styled from "styled-components";
 
