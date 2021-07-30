@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Helmet } from "react-helmet";
-import styled from "styled-components";
+import { Themes } from "./theme";
+import styled, { keyframes } from "styled-components";
 
 export class HackerTyper extends Component<{ code: string }, { cut: number }> {
   constructor(props) {
@@ -45,24 +46,18 @@ export class HackerTyper extends Component<{ code: string }, { cut: number }> {
   }
 }
 
-const BlinkSpan = styled.span`
-  animation: 1s blink step-end infinite;
+const colors = keyframes`
+0% {
+  color: ${Themes.primaryColor};
+}
+50% {
+  color: ${Themes.secondaryColor};
+}
+100% {
+  color: ${Themes.tertiaryColor};
+}
+`;
 
-  @keyframes blink {
-    0% {
-      color: #00ff00;
-    }
-    47% {
-      color: #090;
-    }
-    50% {
-      color: #000;
-    }
-    97% {
-      color: #000;
-    }
-    100% {
-      color: #090;
-    }
-  }
+const BlinkSpan = styled.span`
+  animation: ${colors} 1s step-end infinite;
 `;
