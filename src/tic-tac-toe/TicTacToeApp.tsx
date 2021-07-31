@@ -9,38 +9,33 @@ interface Square {
 
 export class TicTacToeApp extends React.Component<
   {},
-  { turn: string; fields: any }
+  { turn: string; board: any }
 > {
   constructor(props) {
     super(props);
     this.state = {
       turn: "X",
-      fields: this.createBoard(),
+      board: this.createBoard(),
     };
   }
 
   createBoard = () => {
-    let fields = Array(100).fill(" ");
-    return fields;
+    let board = Array(100).fill("");
+    return board;
   };
 
-  nextPlayer = () => {
+  nextPlayer = (): void => {
     this.setState((prevState) => ({
       turn: prevState.turn === "X" ? "O" : "X",
     }));
   };
-
-  handleClick = () => {};
 
   render() {
     return (
       <div>
         <H1>Tic Tac Toe</H1>
         <TicTacToeHeader turn={this.state.turn} />
-        <TicTacToeBoard
-          fields={this.state.fields}
-          handleClick={this.handleClick}
-        />
+        <TicTacToeBoard board={this.state.board} nextPlayer={this.nextPlayer} />
       </div>
     );
   }

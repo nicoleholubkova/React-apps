@@ -3,26 +3,22 @@ import React from "react";
 import styled from "styled-components";
 
 export class TicTacToeBoard extends React.Component<
-  { fields: any[]; handleClick: () => void },
+  { board: any[]; nextPlayer: () => void },
   {}
 > {
   constructor(props) {
     super(props);
   }
   render() {
-    // const doBr = (index) => {
-    //   return (index + 1) % 10 === 0;
-    // };
     return (
       <div>
         <DivWrapper>
-          {this.props.fields.map((field, index) => [
+          {this.props.board.map((board, index) => [
             <TicTacToeSquare
               key={index}
-              value={field}
-              handleClick={this.props.handleClick}
+              value={board}
+              nextPlayer={this.props.nextPlayer}
             />,
-            //doBr(index) ? <br /> : "",
           ])}
         </DivWrapper>
       </div>
@@ -31,8 +27,8 @@ export class TicTacToeBoard extends React.Component<
 }
 
 const DivWrapper = styled.div`
-  margin: auto;
-  max-width: 550px;
+  margin: 50px auto 100px auto;
+  max-width: 516px;
   display: flex;
   flex-wrap: wrap;
 `;

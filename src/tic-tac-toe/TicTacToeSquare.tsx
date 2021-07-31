@@ -1,27 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
-const Td = styled.td`
+const DivWrapper = styled.div`
   border: 1px solid black;
   min-width: 50px;
   height: 50px;
-  flex-wrap: wrap;
+  text-align: center;
+  font-size: 30px;
 `;
 
 interface SquareProps {
-  handleClick: () => void;
   value: string;
+  nextPlayer: () => void;
 }
 
 export class TicTacToeSquare extends React.Component<SquareProps, {}> {
   constructor(props) {
     super(props);
   }
+
+  onClick = (e) => {
+    this.props.nextPlayer();
+  };
+
   render() {
-    return (
-      <div>
-        <Td></Td>
-      </div>
-    );
+    return <DivWrapper onClick={this.onClick}>{this.props.value}</DivWrapper>;
   }
 }
