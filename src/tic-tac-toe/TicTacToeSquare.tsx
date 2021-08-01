@@ -1,8 +1,12 @@
+import { SquareData } from "./TicTacToeApp";
+import { Themes } from "./theme";
 import React from "react";
 import styled from "styled-components";
 
 const DivWrapper = styled.div`
-  border: 1px solid black;
+  border: 2px solid white;
+  background-color: ${Themes.primaryColor};
+  color: ${Themes.secondaryColor};
   min-width: 50px;
   height: 50px;
   text-align: center;
@@ -10,8 +14,9 @@ const DivWrapper = styled.div`
 `;
 
 interface SquareProps {
-  value: string;
-  nextPlayer: () => void;
+  squareData: SquareData;
+  id: number;
+  onClick: (number) => void;
 }
 
 export class TicTacToeSquare extends React.Component<SquareProps, {}> {
@@ -20,10 +25,14 @@ export class TicTacToeSquare extends React.Component<SquareProps, {}> {
   }
 
   onClick = (e) => {
-    this.props.nextPlayer();
+    this.props.onClick(this.props.id);
   };
 
   render() {
-    return <DivWrapper onClick={this.onClick}>{this.props.value}</DivWrapper>;
+    return (
+      <DivWrapper onClick={this.onClick}>
+        {this.props.squareData.value}
+      </DivWrapper>
+    );
   }
 }

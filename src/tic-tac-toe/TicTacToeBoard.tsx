@@ -1,9 +1,14 @@
+import { SquareData } from "./TicTacToeApp";
 import { TicTacToeSquare } from "./TicTacToeSquare";
+import { isThisTypeNode } from "typescript";
 import React from "react";
 import styled from "styled-components";
 
 export class TicTacToeBoard extends React.Component<
-  { board: any[]; nextPlayer: () => void },
+  {
+    squares: SquareData[];
+    onClick: (number) => void;
+  },
   {}
 > {
   constructor(props) {
@@ -13,13 +18,14 @@ export class TicTacToeBoard extends React.Component<
     return (
       <div>
         <DivWrapper>
-          {this.props.board.map((board, index) => [
+          {this.props.squares.map((square, index) => (
             <TicTacToeSquare
               key={index}
-              value={board}
-              nextPlayer={this.props.nextPlayer}
-            />,
-          ])}
+              id={index}
+              squareData={square}
+              onClick={this.props.onClick}
+            />
+          ))}
         </DivWrapper>
       </div>
     );
@@ -28,7 +34,7 @@ export class TicTacToeBoard extends React.Component<
 
 const DivWrapper = styled.div`
   margin: 50px auto 100px auto;
-  max-width: 516px;
+  max-width: 532px;
   display: flex;
   flex-wrap: wrap;
 `;
