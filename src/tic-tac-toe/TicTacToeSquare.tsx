@@ -20,11 +20,11 @@ interface SquareProps {
 }
 
 export class TicTacToeSquare extends React.Component<SquareProps, {}> {
-  constructor(props) {
+  constructor(props: SquareProps) {
     super(props);
   }
 
-  onClick = (e) => {
+  onClick = (e: any) => {
     this.props.onClick(this.props.id);
   };
 

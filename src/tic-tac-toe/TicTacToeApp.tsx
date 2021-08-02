@@ -1,10 +1,23 @@
-import { SIGQUIT } from "constants";
 import { Themes } from "./theme";
 import { TicTacToeBoard } from "./TicTacToeBoard";
 import { TicTacToeHeader } from "./TicTacToeHeader";
-import { timeStamp } from "console";
 import React, { Component } from "react";
 import styled from "styled-components";
+
+const H1 = styled.h1`
+  text-align: center;
+  font-size: 40px;
+  font-family: ${Themes.primaryFont};
+  margin: 50px 0 30px 0;
+`;
+
+const Button = styled.button`
+  text-align: center;
+  position: relative;
+  left: calc(50% - 58px);
+  margin: 0 20px 20px 20px;
+  padding: 5px 10px;
+`;
 
 export interface SquareData {
   value: string;
@@ -58,7 +71,7 @@ const app = (Comp: any) =>
       this.gameOver();
     };
 
-    refreshPage = () => {
+    refreshPage = (): void => {
       window.location.reload();
     };
 
@@ -91,18 +104,3 @@ export const TicTacToeApp = React.memo(
     );
   })
 );
-
-const H1 = styled.h1`
-  text-align: center;
-  font-size: 40px;
-  font-family: ${Themes.primaryFont};
-  margin: 50px 0 30px 0;
-`;
-
-const Button = styled.button`
-  text-align: center;
-  position: relative;
-  left: calc(50% - 58px);
-  margin: 0 20px 20px 20px;
-  padding: 5px 10px;
-`;
