@@ -4,7 +4,7 @@ import { isThisTypeNode } from "typescript";
 import React from "react";
 import styled from "styled-components";
 
-export class TicTacToeBoard extends React.Component<
+export class TicTacToeBoard extends React.PureComponent<
   {
     squares: SquareData[];
     onClick: (number) => void;

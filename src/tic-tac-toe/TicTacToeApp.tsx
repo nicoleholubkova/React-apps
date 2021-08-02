@@ -3,77 +3,94 @@ import { Themes } from "./theme";
 import { TicTacToeBoard } from "./TicTacToeBoard";
 import { TicTacToeHeader } from "./TicTacToeHeader";
 import { timeStamp } from "console";
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 
 export interface SquareData {
   value: string;
 }
-export class TicTacToeApp extends React.Component<
-  {},
-  { turn: string; squares: SquareData[]; counter: number }
-> {
-  constructor(props) {
-    super(props);
-    this.state = {
+
+const app = (Comp: any) =>
+  class AppComp extends Component<
+    {},
+    { turn: string; squares: SquareData[]; counter: number }
+  > {
+    createBoard = (): SquareData[] => {
+      let squares = Array(100).fill({ value: "" });
+      return squares;
+    };
+    state = {
       turn: "X",
       squares: this.createBoard(),
       counter: 0,
     };
-  }
-  createBoard = (): SquareData[] => {
-    let squares = Array(100).fill({ value: "" });
-    return squares;
-  };
 
-  nextPlayer = (): void => {
-    this.setState((prevState) => ({
-      turn: prevState.turn === "X" ? "O" : "X",
-      counter: prevState.counter + 1,
-    }));
-  };
+    nextPlayer = (): void => {
+      this.setState((prevState) => ({
+        turn: prevState.turn === "X" ? "O" : "X",
+        counter: prevState.counter + 1,
+      }));
+    };
 
-  changeValue = (id: number): void => {
-    this.setState((prevState) => ({
-      squares: prevState.squares.map((square, index) =>
-        id === index ? { ...square, value: this.state.turn } : square
-      ),
-    }));
-  };
+    changeValue = (id: number): void => {
+      this.setState((prevState) => ({
+        squares: prevState.squares.map((square, index) =>
+          id === index ? { ...square, value: this.state.turn } : square
+        ),
+      }));
+    };
 
-  hasValue = (id: number): boolean => {
-    return this.state.squares[id].value !== "";
-  };
+    hasValue = (id: number): boolean => {
+      return this.state.squares[id].value !== "";
+    };
 
-  gameOver = (): void => {
-    let emptySq = this.state.squares.filter((sq) => sq.value !== "").length;
-    if (emptySq === 99) {
-      alert("Game Over");
+    gameOver = (): void => {
+      let emptySq = this.state.squares.filter((sq) => sq.value !== "").length;
+      if (emptySq === 99) {
+        alert("Game Over");
+      }
+    };
+
+    onClick = (id: number): void => {
+      if (this.hasValue(id)) return;
+      this.nextPlayer();
+      this.changeValue(id);
+      this.gameOver();
+    };
+
+    refreshPage = () => {
+      window.location.reload();
+    };
+
+    render() {
+      return (
+        <Comp
+          createBoard={this.createBoard}
+          nextPlayer={this.nextPlayer}
+          changeValue={this.changeValue}
+          hasValue={this.hasValue}
+          gameOver={this.gameOver}
+          refreshPage={this.refreshPage}
+          onClick={this.onClick}
+          turn={this.state.turn}
+          squares={this.state.squares}
+          counter={this.state.counter}
+        />
+      );
     }
   };
-
-  onClick = (id: number): void => {
-    if (this.hasValue(id)) return;
-    this.nextPlayer();
-    this.changeValue(id);
-    this.gameOver();
-  };
-
-  refreshPage = () => {
-    window.location.reload();
-  };
-
-  render() {
+export const TicTacToeApp = React.memo(
+  app((props) => {
     return (
       <div>
         <H1>Tic Tac Toe</H1>
-        <Button onClick={this.refreshPage}>New Game</Button>
-        <TicTacToeHeader turn={this.state.turn} counter={this.state.counter} />
-        <TicTacToeBoard squares={this.state.squares} onClick={this.onClick} />
+        <Button onClick={props.refreshPage}>New Game</Button>
+        <TicTacToeHeader turn={props.turn} counter={props.counter} />
+        <TicTacToeBoard squares={props.squares} onClick={props.onClick} />
       </div>
     );
-  }
-}
+  })
+);
 
 const H1 = styled.h1`
   text-align: center;
