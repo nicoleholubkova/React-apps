@@ -1,12 +1,12 @@
 import { SquareData } from "./TicTacToeApp";
-import { Themes } from "./theme";
+import { themes } from "./theme";
 import React from "react";
 import styled from "styled-components";
 
 const DivWrapper = styled.div`
-  border: 2px solid white;
-  background-color: ${Themes.primaryColor};
-  color: ${Themes.secondaryColor};
+  border: 2px solid ${themes.secondaryColor};
+  background-color: ${themes.primaryColor};
+  color: ${themes.secondaryColor};
   min-width: 50px;
   height: 50px;
   text-align: center;

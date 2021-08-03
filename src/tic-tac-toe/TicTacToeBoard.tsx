@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const DivWrapper = styled.div`
   margin: 50px auto 100px auto;
-  max-width: 532px;
+  max-width: 540px;
   display: flex;
   flex-wrap: wrap;
 `;

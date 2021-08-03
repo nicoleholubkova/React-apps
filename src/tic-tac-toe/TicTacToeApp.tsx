@@ -1,14 +1,14 @@
-import { Themes } from "./theme";
 import { TicTacToeBoard } from "./TicTacToeBoard";
 import { TicTacToeHeader } from "./TicTacToeHeader";
 import { inherits } from "util";
+import { themes } from "./theme";
 import React, { Component } from "react";
 import styled from "styled-components";
 
 const H1 = styled.h1`
   text-align: center;
   font-size: 40px;
-  font-family: ${Themes.primaryFont};
+  font-family: ${themes.primaryFont};
   margin: 50px 0 30px 0;
 `;
 
@@ -87,7 +87,7 @@ const app = (Comp: any) =>
     };
 
     resetGame = (): void => {
-      this.setState(() => this.init());
+      this.setState(this.init());
     };
 
     render() {
