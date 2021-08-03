@@ -1,6 +1,7 @@
 import { Themes } from "./theme";
 import { TicTacToeBoard } from "./TicTacToeBoard";
 import { TicTacToeHeader } from "./TicTacToeHeader";
+import { inherits } from "util";
 import React, { Component } from "react";
 import styled from "styled-components";
 
@@ -23,24 +24,38 @@ export interface SquareData {
   value: string;
 }
 
+enum OnTurn {
+  X = "X",
+  O = "O",
+}
+
+const BOARD_SIZE = 10;
+const SQUARE_COUNT = BOARD_SIZE ** 2;
+const FIELD_COUNT_TO_RESET = SQUARE_COUNT - 1;
+
 const app = (Comp: any) =>
   class AppComp extends Component<
     {},
-    { turn: string; squares: SquareData[]; counter: number }
+    { turn: OnTurn; squares: SquareData[]; counter: number }
   > {
     createBoard = (): SquareData[] => {
-      let squares = Array(100).fill({ value: "" });
+      let squares = Array(SQUARE_COUNT).fill({ value: null });
       return squares;
     };
-    state = {
-      turn: "X",
-      squares: this.createBoard(),
-      counter: 0,
+
+    init = () => {
+      return {
+        turn: OnTurn.X,
+        squares: this.createBoard(),
+        counter: 0,
+      };
     };
+
+    state = this.init();
 
     nextPlayer = (): void => {
       this.setState((prevState) => ({
-        turn: prevState.turn === "X" ? "O" : "X",
+        turn: prevState.turn === OnTurn.X ? OnTurn.O : OnTurn.X,
         counter: prevState.counter + 1,
       }));
     };
@@ -48,31 +63,31 @@ const app = (Comp: any) =>
     changeValue = (id: number): void => {
       this.setState((prevState) => ({
         squares: prevState.squares.map((square, index) =>
-          id === index ? { ...square, value: this.state.turn } : square
+          id === index ? { ...square, value: prevState.turn } : square
         ),
       }));
     };
 
     hasValue = (id: number): boolean => {
-      return this.state.squares[id].value !== "";
+      return this.state.squares[id].value !== null;
     };
 
     gameOver = (): void => {
-      let emptySq = this.state.squares.filter((sq) => sq.value !== "").length;
-      if (emptySq === 99) {
+      let emptySq = this.state.squares.filter((sq) => sq.value !== null).length;
+      if (emptySq === FIELD_COUNT_TO_RESET) {
         alert("Game Over");
       }
     };
 
     onClick = (id: number): void => {
       if (this.hasValue(id)) return;
-      this.nextPlayer();
       this.changeValue(id);
+      this.nextPlayer();
       this.gameOver();
     };
 
-    refreshPage = (): void => {
-      window.location.reload();
+    resetGame = (): void => {
+      this.setState(() => this.init());
     };
 
     render() {
@@ -83,7 +98,7 @@ const app = (Comp: any) =>
           changeValue={this.changeValue}
           hasValue={this.hasValue}
           gameOver={this.gameOver}
-          refreshPage={this.refreshPage}
+          refreshPage={this.resetGame}
           onClick={this.onClick}
           turn={this.state.turn}
           squares={this.state.squares}

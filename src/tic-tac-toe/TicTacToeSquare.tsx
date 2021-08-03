@@ -24,13 +24,13 @@ export class TicTacToeSquare extends React.Component<SquareProps, {}> {
     super(props);
   }
 
-  onClick = (e: any) => {
+  onClick = (event: React.FormEvent<HTMLDivElement>) => {
     this.props.onClick(this.props.id);
   };
 
   render() {
     return (
-      <DivWrapper onClick={this.onClick}>
+      <DivWrapper onClick={(event) => this.onClick(event)}>
         {this.props.squareData.value}
       </DivWrapper>
     );
