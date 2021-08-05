@@ -3,6 +3,7 @@ import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MyStateComp } from "./counter/Root";
 
 import { HackerTyper } from "./hackertyper/HackerTyper";
+import { TicTacToeApp } from "./tic-tac-toe/TicTacToeApp";
 import { ToDoApp } from "./todo/ToDoApp";
 import { text } from "./hackertyper/Code";
 import styled from "styled-components";
@@ -43,6 +44,9 @@ export default function App() {
             <div>
               <Link to="/hackertyper">Hacker Typer</Link>
             </div>
+            <div>
+              <Link to="/tic-tac-toe">Tic-Tac-Toe</Link>
+            </div>
           </DivWrapper>
         </nav>
 
@@ -55,6 +59,9 @@ export default function App() {
           </Route>
           <Route path="/hackertyper">
             <HackerTyper code={text} />
+          </Route>
+          <Route path="/tic-tac-toe">
+            <TicTacToeApp />
           </Route>
           <Route path="/">
             <Paragraph>&#128144;</Paragraph>
