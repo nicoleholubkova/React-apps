@@ -20,10 +20,6 @@ interface SquareProps {
 }
 
 export class TicTacToeSquare extends React.Component<SquareProps, {}> {
-  constructor(props: SquareProps) {
-    super(props);
-  }
-
   onClick = (event: React.FormEvent<HTMLDivElement>) => {
     this.props.onClick(this.props.id);
   };

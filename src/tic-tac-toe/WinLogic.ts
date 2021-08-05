@@ -1,7 +1,7 @@
+import { BOARD_SIZE } from "./TicTacToeApp";
+import { COUNT_TO_WIN } from "./TicTacToeApp";
 import { OnTurn } from "./TicTacToeApp";
 import { SquareData } from "./TicTacToeApp";
-
-const COUNT_TO_WIN = 5;
 
 export const checkAll = (turn: OnTurn, squares: SquareData[]): boolean => {
   let board = make2D(squares);
@@ -13,12 +13,15 @@ export const checkAll = (turn: OnTurn, squares: SquareData[]): boolean => {
   );
 };
 
+/**
+ * function that splits the input array into an array of arrays of size ten
+ */
 const make2D = (squares: SquareData[]): any => {
   let result: SquareData[][] = [];
   let tenElements: SquareData[] = [];
   squares.forEach((el, index) => {
     tenElements.push(el);
-    if ((index + 1) % 10 === 0) {
+    if ((index + 1) % BOARD_SIZE === 0) {
       result.push(tenElements);
       tenElements = [];
     }
@@ -26,8 +29,13 @@ const make2D = (squares: SquareData[]): any => {
   return result;
 };
 
-//source: https://codepen.io/Howie_Burger/pen/rLQAxO?editors=0010
+/**
+ * source: https://codepen.io/Howie_Burger/pen/rLQAxO?editors=0010
+ * */
 
+/**
+ * function that check if there is the same value n times (in our case 5 times) next to each other in rows without interruption
+ */
 const checkRows = (turn: OnTurn, board: SquareData[][]): boolean => {
   for (let row = 0; row < board.length; row++) {
     let count = 0;
@@ -47,7 +55,9 @@ const checkRows = (turn: OnTurn, board: SquareData[][]): boolean => {
   }
   return false;
 };
-
+/**
+ * function that check if there is the same value n times (in our case 5 times) next to each other in cols without interruption
+ */
 const checkCols = (turn: OnTurn, board: SquareData[][]): boolean => {
   for (let col = 0; col < board.length; col++) {
     let count = 0;
@@ -67,7 +77,9 @@ const checkCols = (turn: OnTurn, board: SquareData[][]): boolean => {
   }
   return false;
 };
-
+/**
+ * function that check if there is the same value n times (in our case 5 times) next to each other in the main diagonal (from left to right) without interruption
+ */
 const checkDiagLR = (turn: OnTurn, board: SquareData[][]): boolean => {
   let count = 0;
   let length = board.length;
@@ -113,13 +125,15 @@ const checkDiagLR = (turn: OnTurn, board: SquareData[][]): boolean => {
   }
   return false;
 };
-
+/**
+ * function that check if there is the same value n times (in our case 5 times) next to each other in the secondary diagonal (from right to left) without interruption
+ */
 const checkDiagRL = (turn: OnTurn, board: SquareData[][]): boolean => {
   let count = 0;
   let length = board.length;
   let maxLength = length - COUNT_TO_WIN + 1;
   let winArray: number[][] = [];
-  // Run Bottom half diagonal Top Right to Botom Left (incl middle)
+  // Run Bottom half diagonal Top Right to Bottom Left (incl middle)
   for (let rowStart = 0; rowStart < maxLength; rowStart++) {
     for (
       let row = rowStart, col = length - 1;
@@ -138,7 +152,7 @@ const checkDiagRL = (turn: OnTurn, board: SquareData[][]): boolean => {
       }
     }
   }
-  // Run Top half diagonal Top Right to Botom Left (excl middle)
+  // Run Top half diagonal Top Right to Bottom Left (excl middle)
   for (let colStart = length - 2; colStart > COUNT_TO_WIN - 2; colStart--) {
     for (
       let col = colStart, row = 0;

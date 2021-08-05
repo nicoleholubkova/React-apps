@@ -30,8 +30,9 @@ export enum OnTurn {
   O = "O",
 }
 
-const BOARD_SIZE = 10;
+export const BOARD_SIZE = 10;
 const SQUARE_COUNT = BOARD_SIZE ** 2;
+export const COUNT_TO_WIN = 5;
 
 const app = (Comp: any) =>
   class AppComp extends Component<
