@@ -7,25 +7,24 @@ import styled from "styled-components";
 
 export interface CardData {
   symbol: Symbol;
-  selected: boolean;
+  revealed: boolean;
   id: number;
   matched: boolean;
 }
 
 export interface Symbol {
-  id: number;
   emoji: string;
 }
 
 const symbols = [
-  { id: 1, emoji: "🐶" },
-  { id: 2, emoji: "🐱" },
-  { id: 3, emoji: "🐼" },
-  { id: 4, emoji: "🦁" },
-  { id: 5, emoji: "🐷" },
-  { id: 6, emoji: "🐴" },
-  { id: 7, emoji: "🦓" },
-  { id: 8, emoji: "🐠" },
+  { emoji: "🐶" },
+  { emoji: "🐱" },
+  { emoji: "🐼" },
+  { emoji: "🦁" },
+  { emoji: "🐷" },
+  { emoji: "🐴" },
+  { emoji: "🦓" },
+  { emoji: "🐠" },
 ];
 
 const prepareCards = (): CardData[] => {
@@ -35,7 +34,7 @@ const prepareCards = (): CardData[] => {
     .map((symbol, index) => {
       return {
         symbol: symbol,
-        selected: false,
+        revealed: false,
         id: index,
         matched: false,
       };
@@ -44,75 +43,71 @@ const prepareCards = (): CardData[] => {
 
 export const MemoryGameApp = () => {
   const [cards, setCards] = useState(prepareCards());
-  const [numberOfSelectedCard, setNumberOfSelectedCard] = useState(0);
-  const [moves, setMoves] = useState(0);
+  const [numberOfSelectedCards, setNumberOfSelectedCards] = useState<number>(0);
+  const [moves, setMoves] = useState<number>(0);
 
   const startNewGame = () => {
     setCards(prepareCards());
-    setNumberOfSelectedCard(0);
+    setNumberOfSelectedCards(0);
     setMoves(0);
   };
 
   /**
    * inspiration for game logic: https://github.com/Ronnehag/reactjs-memory-game/blob/master/src/components/GameBoard.js,
    * https://github.com/kurtpetrek/react-memory-game/blob/master/src/MemoryGame.js
-   * When 2 cards are selected, if their symbol match, assign matched to true and check if game is over.
-   * If they don't match, assign a temporary const to identity which cards need to be closed in case 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one.
+   *If they don't match, assign a temporary const to identity which cards need to be closed in case 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one.
    */
-
   const selectCard = (id: number) => {
-    if (numberOfSelectedCard >= 2) return;
-    setCards((prevState) => {
-      const copy = prevState.map((card) => {
-        if (card.id === id) {
-          return { ...card, selected: true };
-        }
-        return card;
-      });
+    if (numberOfSelectedCards >= 2) return;
 
-      const selected = copy.filter((card) => card.selected);
-      if (selected.length >= 2) {
-        // found match ? clear it :
-        if (selected[0].symbol === selected[1].symbol)
-          matchCard(selected[0].symbol);
+    setCards((prevState) => {
+      const copy = prevState.map((card) =>
+        card.id === id ? { ...card, revealed: true } : card
+      );
+
+      const revealed = copy.filter((card) => card.revealed);
+
+      if (revealed.length === 2) {
+        if (revealed[0].symbol === revealed[1].symbol) {
+          matchCard(revealed[1].symbol);
+        }
+
         setMoves((prevState) => prevState + 1);
         setTimeout(() => unselectAll(), 500);
       }
 
       return copy;
     });
-    setNumberOfSelectedCard((prevState) => prevState + 1);
+
+    setNumberOfSelectedCards((prevState) => prevState + 1);
   };
 
+  // When 2 cards are selected, if their symbol match, assign matched to true and check if game is over.
   const matchCard = (symbol: Symbol) => {
     setCards((prevState) => {
-      const copy = prevState.map((card) => {
-        if (card.symbol === symbol) {
-          return { ...card, matched: true };
-        }
-        return card;
-      });
+      const copy = prevState.map((card) =>
+        card.symbol === symbol ? { ...card, matched: true } : card
+      );
 
-      /**
-       * Check if all the couples have been matched
-       */
-      const allCardsMatch = copy.filter((card) => !card.matched).length <= 0;
+      // Check if all cards have been matched
+      const allCardsMatch = copy.every((card) => card.matched);
       if (allCardsMatch) {
         setTimeout(() => startNewGame(), 800);
       }
+
       return copy;
     });
   };
+
   /**
    * If two selected cards doesn't match, this function is called to turn those cards back.
    */
   const unselectAll = () => {
     setCards((prevState) => {
-      return prevState.map((card) => {
-        return { ...card, selected: false };
-      });
+      return prevState.map((card) => ({ ...card, revealed: false }));
     });
-    setNumberOfSelectedCard(0);
+
+    setNumberOfSelectedCards(0);
   };
 
   return (
@@ -132,4 +127,5 @@ const H1 = styled.h1`
   text-transform: ${themes.textTransform};
   margin: 30px;
   color: ${themes.secondaryColor};
+  font-family: ${themes.primaryFont};
 `;

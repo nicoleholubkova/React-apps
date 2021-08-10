@@ -14,7 +14,7 @@ export const Card = (props: CardProps) => {
         props.selectCard(props.card.id);
       }}
     >
-      {props.card.selected || props.card.matched
+      {props.card.revealed || props.card.matched
         ? props.card.symbol.emoji
         : "❔"}
     </DivWrapperCard>

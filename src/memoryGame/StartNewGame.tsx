@@ -10,7 +10,7 @@ export const Newgame = (props: NewGameProps) => {
   return (
     <div>
       <Button onClick={props.startNewGame}>Start New Game</Button>
-      <H5>Moves: {props.moves} </H5>
+      <H4>Moves: {props.moves} </H4>
     </div>
   );
 };
@@ -27,7 +27,7 @@ const Button = styled.button`
   }
 `;
 
-const H5 = styled.h5`
+const H4 = styled.h4`
   text-align: ${themes.textAlign};
   padding: 5px;
   color: ${themes.secondaryColor};
