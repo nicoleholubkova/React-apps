@@ -1,6 +1,7 @@
 import { CardGrid } from "./Grid";
 import { Helmet } from "react-helmet";
 import { Newgame } from "./StartNewGame";
+import { themes } from "./Theme";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -35,8 +36,8 @@ const prepareCards = (): CardData[] => {
       return {
         symbol: symbol,
         selected: false,
-        matched: false,
         id: index,
+        matched: false,
       };
     });
 };
@@ -53,8 +54,10 @@ export const MemoryGameApp = () => {
   };
 
   /**
-   * inspiration for game logic: https://github.com/Ronnehag/reactjs-memory-game/blob/master/src/components/GameBoard.js, https://github.com/kurtpetrek/react-memory-game/blob/master/src/MemoryGame.js
-   * When 2 cards are selected, if their symbol match, assign cleared to true and check if game is over. If they don't match, assign a temporary const to identity which cards need to be closed in case 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one.
+   * inspiration for game logic: https://github.com/Ronnehag/reactjs-memory-game/blob/master/src/components/GameBoard.js,
+   * https://github.com/kurtpetrek/react-memory-game/blob/master/src/MemoryGame.js
+   * When 2 cards are selected, if their symbol match, assign matched to true and check if game is over.
+   * If they don't match, assign a temporary const to identity which cards need to be closed in case 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one.
    */
 
   const selectCard = (id: number) => {
@@ -85,7 +88,7 @@ export const MemoryGameApp = () => {
     setCards((prevState) => {
       const copy = prevState.map((card) => {
         if (card.symbol === symbol) {
-          return { ...card, cleared: true };
+          return { ...card, matched: true };
         }
         return card;
       });
@@ -125,8 +128,8 @@ export const MemoryGameApp = () => {
 };
 
 const H1 = styled.h1`
-  text-align: center;
-  text-transform: uppercase;
+  text-align: ${themes.textAlign};
+  text-transform: ${themes.textTransform};
   margin: 30px;
-  color: #08090a;
+  color: ${themes.secondaryColor};
 `;

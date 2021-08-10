@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 interface CardGridProps {
   cards: CardData[];
-  selectCard: (number) => void;
+  selectCard: (id: number) => void;
 }
 
 export const CardGrid = (props: CardGridProps) => {
