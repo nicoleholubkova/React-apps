@@ -1,130 +1,132 @@
 import { CardGrid } from "./Grid";
 import { Helmet } from "react-helmet";
-import React, { Component } from "react";
+import { Newgame } from "./StartNewGame";
+import { useState } from "react";
 import styled from "styled-components";
 
-interface NewGameProps {
-  startNewGame: () => void;
-}
-
-export interface MemoryState {
+export interface CardData {
+  symbol: Symbol;
+  selected: boolean;
   id: number;
-  cardState: number;
-  backgroundColor: string;
+  matched: boolean;
 }
 
-const Newgame = (props: NewGameProps) => {
-  return <Button onClick={props.startNewGame}>Start New Game</Button>;
+export interface Symbol {
+  id: number;
+  emoji: string;
+}
+
+const symbols = [
+  { id: 1, emoji: "🐶" },
+  { id: 2, emoji: "🐱" },
+  { id: 3, emoji: "🐼" },
+  { id: 4, emoji: "🦁" },
+  { id: 5, emoji: "🐷" },
+  { id: 6, emoji: "🐴" },
+  { id: 7, emoji: "🦓" },
+  { id: 8, emoji: "🐠" },
+];
+
+const prepareCards = (): CardData[] => {
+  return symbols
+    .concat(symbols)
+    .sort((a, b) => 0.5 - Math.random())
+    .map((symbol, index) => {
+      return {
+        symbol: symbol,
+        selected: false,
+        matched: false,
+        id: index,
+      };
+    });
 };
 
-export class MemoryGameApp extends Component<
-  {},
-  { cards: MemoryState[]; secondClick: boolean }
-> {
-  constructor(props) {
-    super(props);
-    const CardState = {
-      hiding: 0,
-      showing: 1,
-      matching: 2,
-    };
-    let cards = [
-      { id: 0, cardState: CardState.hiding, backgroundColor: "red" },
-      { id: 1, cardState: CardState.hiding, backgroundColor: "red" },
-      { id: 2, cardState: CardState.hiding, backgroundColor: "navy" },
-      { id: 3, cardState: CardState.hiding, backgroundColor: "navy" },
-      { id: 4, cardState: CardState.hiding, backgroundColor: "green" },
-      { id: 5, cardState: CardState.hiding, backgroundColor: "green" },
-      { id: 6, cardState: CardState.hiding, backgroundColor: "yellow" },
-      { id: 7, cardState: CardState.hiding, backgroundColor: "yellow" },
-      { id: 8, cardState: CardState.hiding, backgroundColor: "black" },
-      { id: 9, cardState: CardState.hiding, backgroundColor: "black" },
-      { id: 10, cardState: CardState.hiding, backgroundColor: "purple" },
-      { id: 11, cardState: CardState.hiding, backgroundColor: "purple" },
-      { id: 12, cardState: CardState.hiding, backgroundColor: "pink" },
-      { id: 13, cardState: CardState.hiding, backgroundColor: "pink" },
-      { id: 14, cardState: CardState.hiding, backgroundColor: "lightskyblue" },
-      { id: 15, cardState: CardState.hiding, backgroundColor: "lightskyblue" },
-    ];
+export const MemoryGameApp = () => {
+  const [cards, setCards] = useState(prepareCards());
+  const [numberOfSelectedCard, setNumberOfSelectedCard] = useState(0);
+  const [moves, setMoves] = useState(0);
 
-    cards = this.shuffle(cards);
-    this.state = { cards, secondClick: false };
-  }
-
-  shuffle = (arr) => arr.sort(() => 0.5 - Math.random());
-
-  startNewGame = () => {
-    const cards = [...this.state.cards];
-    cards.map((card) => {
-      return { ...card, cardState: 0 };
-    });
-    this.setState({ cards });
-  };
-  onClick = (id: number) => {
-    const showingCards = this.state.cards.map((card) => {
-      if (card.id === id) {
-        return { ...card, cardState: 1 };
-      }
-      return card;
-    });
-    const { secondClick } = this.state;
-
-    const showingCardsIds = showingCards
-      .filter((card) => card.cardState === 1)
-      .map((card) => card.id);
-
-    const card1 = showingCards.filter((card) => card.id === showingCardsIds[0]);
-    const card1color = card1[0].backgroundColor;
-
-    if (secondClick) {
-      const card2 = showingCards.filter(
-        (card) => card.id === showingCardsIds[1]
-      );
-      const card2color = card2[0].backgroundColor;
-      if (card1color === card2color) {
-        const matchedCards = showingCards.map((card) =>
-          showingCardsIds.includes(card.id) ? { ...card, cardState: 2 } : card
-        );
-        this.setState({ cards: matchedCards, secondClick: false });
-        return;
-      } else if (card1color !== card2color) {
-        const notMatchedCards = showingCards.map((card) =>
-          showingCardsIds.includes(card.id) ? { ...card, cardState: 0 } : card
-        );
-        this.setState({ cards: showingCards }, () =>
-          setTimeout(
-            () => this.setState({ cards: notMatchedCards, secondClick: false }),
-            300
-          )
-        );
-        return;
-      }
-    }
-    this.setState({ cards: showingCards, secondClick: true });
+  const startNewGame = () => {
+    setCards(prepareCards());
+    setNumberOfSelectedCard(0);
+    setMoves(0);
   };
 
-  render() {
-    return (
-      <div>
-        <Helmet>
-          <style>{"body { background-color: #F4F7F5}"}</style>
-        </Helmet>
-        <H1>Memory game</H1>
-        <Newgame startNewGame={this.startNewGame} />
-        <CardGrid onClick={this.onClick} cards={this.state.cards} />
-      </div>
-    );
-  }
-}
+  /**
+   * inspiration for game logic: https://github.com/Ronnehag/reactjs-memory-game/blob/master/src/components/GameBoard.js, https://github.com/kurtpetrek/react-memory-game/blob/master/src/MemoryGame.js
+   * When 2 cards are selected, if their symbol match, assign cleared to true and check if game is over. If they don't match, assign a temporary const to identity which cards need to be closed in case 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one.
+   */
+
+  const selectCard = (id: number) => {
+    if (numberOfSelectedCard >= 2) return;
+    setCards((prevState) => {
+      const copy = prevState.map((card) => {
+        if (card.id === id) {
+          return { ...card, selected: true };
+        }
+        return card;
+      });
+
+      const selected = copy.filter((card) => card.selected);
+      if (selected.length >= 2) {
+        // found match ? clear it :
+        if (selected[0].symbol === selected[1].symbol)
+          matchCard(selected[0].symbol);
+        setMoves((prevState) => prevState + 1);
+        setTimeout(() => unselectAll(), 500);
+      }
+
+      return copy;
+    });
+    setNumberOfSelectedCard((prevState) => prevState + 1);
+  };
+
+  const matchCard = (symbol: Symbol) => {
+    setCards((prevState) => {
+      const copy = prevState.map((card) => {
+        if (card.symbol === symbol) {
+          return { ...card, cleared: true };
+        }
+        return card;
+      });
+
+      /**
+       * Check if all the couples have been matched
+       */
+      const allCardsMatch = copy.filter((card) => !card.matched).length <= 0;
+      if (allCardsMatch) {
+        setTimeout(() => startNewGame(), 800);
+      }
+      return copy;
+    });
+  };
+  /**
+   * If two selected cards doesn't match, this function is called to turn those cards back.
+   */
+  const unselectAll = () => {
+    setCards((prevState) => {
+      return prevState.map((card) => {
+        return { ...card, selected: false };
+      });
+    });
+    setNumberOfSelectedCard(0);
+  };
+
+  return (
+    <div>
+      <Helmet>
+        <style>{"body { background-color: #F4F7F5}"}</style>
+      </Helmet>
+      <H1>Memory game</H1>
+      <Newgame startNewGame={startNewGame} moves={moves} />
+      <CardGrid cards={cards} selectCard={selectCard} />
+    </div>
+  );
+};
 
 const H1 = styled.h1`
   text-align: center;
   text-transform: uppercase;
-  margin: 40px;
-  color: #222823;
-`;
-
-const Button = styled.button`
-  padding: 5px 10px;
-  margin: 0 0 20px 40%;
+  margin: 30px;
+  color: #08090a;
 `;
