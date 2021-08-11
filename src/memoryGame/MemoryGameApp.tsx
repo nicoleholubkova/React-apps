@@ -6,13 +6,13 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export interface CardData {
-  symbol: Symbol;
+  symbol: CardSymbol;
   revealed: boolean;
   id: number;
   matched: boolean;
 }
 
-export interface Symbol {
+export interface CardSymbol {
   emoji: string;
 }
 
@@ -27,10 +27,12 @@ const symbols = [
   { emoji: "🐠" },
 ];
 
+const shuffleArray = (a: any, b: any): number => 0.5 - Math.random();
+
 const prepareCards = (): CardData[] => {
   return symbols
     .concat(symbols)
-    .sort((a, b) => 0.5 - Math.random())
+    .sort(shuffleArray)
     .map((symbol, index) => {
       return {
         symbol: symbol,
@@ -83,7 +85,7 @@ export const MemoryGameApp = () => {
   };
 
   // When 2 cards are selected, if their symbol match, assign matched to true and check if game is over.
-  const matchCard = (symbol: Symbol) => {
+  const matchCard = (symbol: CardSymbol) => {
     setCards((prevState) => {
       const copy = prevState.map((card) =>
         card.symbol === symbol ? { ...card, matched: true } : card
