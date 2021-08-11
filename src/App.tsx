@@ -1,8 +1,8 @@
 import "./App.css";
-import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { MyStateComp } from "./counter/Root";
-
 import { HackerTyper } from "./hackertyper/HackerTyper";
+import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { MemoryGameApp } from "./memoryGame/MemoryGameApp";
+import { MyStateComp } from "./counter/Root";
 import { PostListApp } from "./blogPost/PostListApp";
 import { TicTacToeApp } from "./tic-tac-toe/TicTacToeApp";
 import { ToDoApp } from "./todo/ToDoApp";
@@ -51,6 +51,9 @@ export default function App() {
             <div>
               <Link to="/blogPost">Blog post</Link>
             </div>
+            <div>
+              <Link to="/memoryGame">Memory game</Link>
+            </div>
           </DivWrapper>
         </nav>
 
@@ -69,6 +72,9 @@ export default function App() {
           </Route>
           <Route path="/blogPost">
             <PostListApp />
+          </Route>
+          <Route path="/memoryGame">
+            <MemoryGameApp />
           </Route>
           <Route path="/">
             <Paragraph>&#128144;</Paragraph>
