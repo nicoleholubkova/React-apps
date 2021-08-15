@@ -1,4 +1,5 @@
 import "./App.css";
+import { ChunkNorris } from "./chunkNorris/ChunkNorrisApp";
 import { HackerTyper } from "./hackertyper/HackerTyper";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MemoryGameApp } from "./memoryGame/MemoryGameApp";
@@ -54,6 +55,9 @@ export default function App() {
             <div>
               <Link to="/memoryGame">Memory game</Link>
             </div>
+            <div>
+              <Link to="/chunkNorris">Chuck Norris jokes</Link>
+            </div>
           </DivWrapper>
         </nav>
 
@@ -75,6 +79,9 @@ export default function App() {
           </Route>
           <Route path="/memoryGame">
             <MemoryGameApp />
+          </Route>
+          <Route path="/chunkNorris">
+            <ChunkNorris />
           </Route>
           <Route path="/">
             <Paragraph>&#128144;</Paragraph>
