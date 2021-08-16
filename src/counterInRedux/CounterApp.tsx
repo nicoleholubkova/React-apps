@@ -1,10 +1,9 @@
 import { Theme } from "./Theme";
-import { connect } from "react-redux";
-import { createStore } from "redux";
-import React from "react";
+import { combineReducers, createStore } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-const reducer = (state = 0, action: { type: any }) => {
+const countReducer = (state = 0, action: { type: any }) => {
   switch (action.type) {
     case "INCREMENT1":
       return state + 1;
@@ -26,10 +25,14 @@ const reducer = (state = 0, action: { type: any }) => {
       return state;
   }
 };
+const allReducers = combineReducers({
+  counter: countReducer,
+});
 
-export const store = createStore(reducer);
+export const store = createStore(allReducers);
 
-interface CounterProps {
+type RootState = ReturnType<typeof allReducers>;
+export interface CounterProps {
   onIncrement1: any;
   onIncrement2: any;
   onDecrement1: any;
@@ -38,44 +41,53 @@ interface CounterProps {
   onPowState: any;
   onDivided: any;
   onSquareRoot: any;
-  value: any;
+  count: any;
 }
-
-const Counter = (props: CounterProps) => (
-  <React.Fragment>
-    <H1>Your current number is:{props.value} </H1>
-    <Button onClick={props.onIncrement1}>increment 1</Button>
-    <Button onClick={props.onIncrement2}>increment 2</Button>
-    <Button onClick={props.onDecrement1}>decrement 1</Button>
-    <Button onClick={props.onDecrement2}>decrement 2</Button>
-    <Button onClick={props.onPow2}>exponent 2</Button>
-    <Button onClick={props.onPowState}>exponent current number</Button>
-    <Button onClick={props.onDivided}>divided 2</Button>
-    <Button onClick={props.onSquareRoot}>square root of current number</Button>
-  </React.Fragment>
-);
-
-const mapStateToProps = (state: any) => {
-  return {
-    value: state,
-  };
-};
-
-const mapDispatchToProps = (dispatch: (arg0: { type: string }) => any) => ({
-  onIncrement1: () => dispatch({ type: "INCREMENT1" }),
-  onIncrement2: () => dispatch({ type: "INCREMENT2" }),
-  onDecrement1: () => dispatch({ type: "DECREMENT1" }),
-  onDecrement2: () => dispatch({ type: "DECREMENT2" }),
-  onPow2: () => dispatch({ type: "POW2" }),
-  onPowState: () => dispatch({ type: "POWSTATE" }),
-  onDivided: () => dispatch({ type: "DIVIDED2" }),
-  onSquareRoot: () => dispatch({ type: "SQRTSTATE" }),
+const buttonsAction = () => ({
+  onIncrement1: () => ({ type: "INCREMENT1" }),
+  onIncrement2: () => ({ type: "INCREMENT2" }),
+  onDecrement1: () => ({ type: "DECREMENT1" }),
+  onDecrement2: () => ({ type: "DECREMENT2" }),
+  onPow2: () => ({ type: "POW2" }),
+  onPowState: () => ({ type: "POWSTATE" }),
+  onDivided: () => ({ type: "DIVIDED2" }),
+  onSquareRoot: () => ({ type: "SQRTSTATE" }),
 });
 
-export const CounterInRedux = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Counter);
+export const CounterInRedux = () => {
+  const count = useSelector((state: RootState) => state.counter);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <H1>Your current number is:{count} </H1>
+      <Button onClick={() => dispatch(buttonsAction().onIncrement1())}>
+        increment 1
+      </Button>
+      <Button onClick={() => dispatch(buttonsAction().onIncrement2())}>
+        increment 2
+      </Button>
+      <Button onClick={() => dispatch(buttonsAction().onDecrement1())}>
+        decrement 1
+      </Button>
+      <Button onClick={() => dispatch(buttonsAction().onDecrement2())}>
+        decrement 2
+      </Button>
+      <Button onClick={() => dispatch(buttonsAction().onPow2())}>
+        exponent 2
+      </Button>
+      <Button onClick={() => dispatch(buttonsAction().onPowState())}>
+        exponent current number
+      </Button>
+      <Button onClick={() => dispatch(buttonsAction().onDivided())}>
+        divided 2
+      </Button>
+      <Button onClick={() => dispatch(buttonsAction().onSquareRoot())}>
+        square root of current number
+      </Button>
+    </div>
+  );
+};
 
 const H1 = styled.h1`
   text-align: ${Theme.textAlign};
