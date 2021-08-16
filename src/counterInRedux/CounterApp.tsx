@@ -3,23 +3,32 @@ import { combineReducers, createStore } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
+const INCREMENT1 = "INCREMENT1";
+const DECREMENT1 = "DECREMENT1";
+const INCREMENT2 = "INCREMENT2";
+const DECREMENT2 = "DECREMENT2";
+const POW2 = "POW2";
+const POWSTATE = "POWSTATE";
+const DIVIDED2 = "DIVIDED2";
+const SQRTSTATE = "SQRTSTATE";
+
 const countReducer = (state = 0, action: { type: any }) => {
   switch (action.type) {
-    case "INCREMENT1":
+    case INCREMENT1:
       return state + 1;
-    case "DECREMENT1":
+    case DECREMENT1:
       return state - 1;
-    case "INCREMENT2":
+    case INCREMENT2:
       return state + 2;
-    case "DECREMENT2":
+    case DECREMENT2:
       return state - 2;
-    case "POW2":
+    case POW2:
       return state ** 2;
-    case "POWSTATE":
+    case POWSTATE:
       return state ** state;
-    case "DIVIDED2":
+    case DIVIDED2:
       return state / 2;
-    case "SQRTSTATE":
+    case SQRTSTATE:
       return Math.sqrt(state);
     default:
       return state;
@@ -44,18 +53,20 @@ export interface CounterProps {
   count: any;
 }
 const buttonsAction = () => ({
-  onIncrement1: () => ({ type: "INCREMENT1" }),
-  onIncrement2: () => ({ type: "INCREMENT2" }),
-  onDecrement1: () => ({ type: "DECREMENT1" }),
-  onDecrement2: () => ({ type: "DECREMENT2" }),
-  onPow2: () => ({ type: "POW2" }),
-  onPowState: () => ({ type: "POWSTATE" }),
-  onDivided: () => ({ type: "DIVIDED2" }),
-  onSquareRoot: () => ({ type: "SQRTSTATE" }),
+  onIncrement1: () => ({ type: INCREMENT1 }),
+  onIncrement2: () => ({ type: INCREMENT2 }),
+  onDecrement1: () => ({ type: DECREMENT1 }),
+  onDecrement2: () => ({ type: DECREMENT2 }),
+  onPow2: () => ({ type: POW2 }),
+  onPowState: () => ({ type: POWSTATE }),
+  onDivided: () => ({ type: DIVIDED2 }),
+  onSquareRoot: () => ({ type: SQRTSTATE }),
 });
 
+const counterSelector = (state: RootState) => state.counter;
+
 export const CounterInRedux = () => {
-  const count = useSelector((state: RootState) => state.counter);
+  const count = useSelector(counterSelector);
   const dispatch = useDispatch();
 
   return (
