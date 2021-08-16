@@ -3,14 +3,14 @@ import { combineReducers, createStore } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-const INCREMENT1 = "INCREMENT1";
-const DECREMENT1 = "DECREMENT1";
-const INCREMENT2 = "INCREMENT2";
-const DECREMENT2 = "DECREMENT2";
-const POW2 = "POW2";
-const POWSTATE = "POWSTATE";
-const DIVIDED2 = "DIVIDED2";
-const SQRTSTATE = "SQRTSTATE";
+const INCREMENT1 = "INCREMENT1" as const;
+const DECREMENT1 = "DECREMENT1" as const;
+const INCREMENT2 = "INCREMENT2" as const;
+const DECREMENT2 = "DECREMENT2" as const;
+const POW2 = "POW2" as const;
+const POWSTATE = "POWSTATE" as const;
+const DIVIDED2 = "DIVIDED2" as const;
+const SQRTSTATE = "SQRTSTATE" as const;
 
 const countReducer = (state = 0, action: { type: any }) => {
   switch (action.type) {
@@ -41,17 +41,7 @@ const allReducers = combineReducers({
 export const store = createStore(allReducers);
 
 type RootState = ReturnType<typeof allReducers>;
-export interface CounterProps {
-  onIncrement1: any;
-  onIncrement2: any;
-  onDecrement1: any;
-  onDecrement2: any;
-  onPow2: any;
-  onPowState: any;
-  onDivided: any;
-  onSquareRoot: any;
-  count: any;
-}
+
 const buttonsAction = () => ({
   onIncrement1: () => ({ type: INCREMENT1 }),
   onIncrement2: () => ({ type: INCREMENT2 }),
