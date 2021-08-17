@@ -1,10 +1,12 @@
 import "./App.css";
 import { ChunkNorris } from "./chunkNorris/ChunkNorrisApp";
+import { CounterInRedux, store } from "./counterInRedux/CounterApp";
 import { HackerTyper } from "./hackertyper/HackerTyper";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MemoryGameApp } from "./memoryGame/MemoryGameApp";
 import { MyStateComp } from "./counter/Root";
 import { PostListApp } from "./blogPost/PostListApp";
+import { Provider } from "react-redux";
 import { TicTacToeApp } from "./tic-tac-toe/TicTacToeApp";
 import { ToDoApp } from "./todo/ToDoApp";
 import { text } from "./hackertyper/Code";
@@ -58,6 +60,9 @@ export default function App() {
             <div>
               <Link to="/chunkNorris">Chuck Norris jokes</Link>
             </div>
+            <div>
+              <Link to="/counterInRedux">Counter in Redux</Link>
+            </div>
           </DivWrapper>
         </nav>
 
@@ -83,6 +88,12 @@ export default function App() {
           <Route path="/chunkNorris">
             <ChunkNorris />
           </Route>
+          <Provider store={store}>
+            <Route path="/counterInRedux">
+              <CounterInRedux />
+            </Route>
+          </Provider>
+
           <Route path="/">
             <Paragraph>&#128144;</Paragraph>
           </Route>

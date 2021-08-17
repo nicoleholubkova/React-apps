@@ -1,6 +1,6 @@
 import { OneJoke } from "./OneJoke";
 import { URL_RANDOM } from "./Config";
-import { removeDuplicite } from "./arrayUtils";
+import { removeDuplicate } from "./ArrayUtils";
 import { themes } from "./Theme";
 import { useEffect, useState } from "react";
 import loadingGIF from "./Spinner-1s-200px.svg";
@@ -32,7 +32,7 @@ export const RandomJokes = () => {
           const response = await fetch(URL_RANDOM);
           const data: JokeType = await response.json();
           jokesArray.push(data);
-          const isDuplicate = removeDuplicite(jokesArray);
+          const isDuplicate = removeDuplicate(jokesArray);
           setJokes(isDuplicate);
           setLoadingJokes(false);
         }

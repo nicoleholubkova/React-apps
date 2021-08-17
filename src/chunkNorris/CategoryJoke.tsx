@@ -1,7 +1,7 @@
 import { JokeType } from "./RandomJokes";
 import { OneJoke } from "./OneJoke";
 import { URL_CATEGORY } from "./Config";
-import { removeDuplicite } from "./arrayUtils";
+import { removeDuplicate } from "./ArrayUtils";
 import { themes } from "./Theme";
 import { useEffect, useState } from "react";
 import loadingGIF from "./Spinner-1s-200px.svg";
@@ -26,7 +26,7 @@ export const CategoryJoke = (props: { category: string }) => {
           const response = await fetch(URL_CATEGORY + props.category);
           const data: JokeType = await response.json();
           jokesArray.push(data);
-          const isDuplicate = removeDuplicite(jokesArray);
+          const isDuplicate = removeDuplicate(jokesArray);
           if (counter > NUMBER_OF_ATTEMPTS) {
             return;
           }
