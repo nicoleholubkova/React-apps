@@ -2,24 +2,28 @@ import { CategoryJoke } from "./CategoryJoke";
 import { Helmet } from "react-helmet";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { RandomJokes } from "./RandomJokes";
+import { URL_ALL_CATEGORIES, URL_BASE } from "./Config";
 import { themes } from "./Theme";
 import { useEffect, useState } from "react";
+import loadingGIF from "./Spinner-1s-200px.svg";
 import styled from "styled-components";
 
 export const ChunkNorris = () => {
   const [categories, setCategories] = useState<string[]>([]);
-  const [error, setError] = useState(null as null | string);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getCategories = async () => {
       try {
-        const response = await fetch(
-          "https://api.chucknorris.io/jokes/categories"
-        );
+        setLoading(true);
+        const response = await fetch(URL_ALL_CATEGORIES);
         const data: string[] = await response.json();
         setCategories(data);
-      } catch (err) {
-        setError(err.toString());
+        setLoading(false);
+      } catch {
+        setError(true);
+        setLoading(false);
       }
     };
     getCategories();
@@ -28,20 +32,31 @@ export const ChunkNorris = () => {
   return (
     <div>
       <Helmet>
-        <style>{"body { background-color: #F2EFE9}"}</style>
+        <style>{`body { background-color: ${themes.quinaryColor}}`}</style>
       </Helmet>
       <div>
-        <ErrorDiv>{error && <div> Error: {error}</div>}</ErrorDiv>
         <H1>Chuck Norris jokes</H1>
         <Router>
           <DivHomePage>
-            <Link to={"/RandomJokes"}>Home Page</Link>
+            <LinkHome to={"/RandomJokes"}>Home Page</LinkHome>
           </DivHomePage>
+
+          {loading ? (
+            <DivLoading>
+              <img src={loadingGIF} alt="Loading" />
+            </DivLoading>
+          ) : null}
+          {error ? (
+            <DivError> Unable to get data from ${URL_ALL_CATEGORIES} </DivError>
+          ) : null}
+
           <Ul>
-            {categories.map((category, index) => {
+            {categories.map((category) => {
               return (
-                <Li key={index}>
-                  <Link to={"/chunkNorris/" + category}>{category}</Link>
+                <Li key={category}>
+                  <LinkCategory to={URL_BASE + category}>
+                    {category}
+                  </LinkCategory>
                 </Li>
               );
             })}
@@ -52,7 +67,7 @@ export const ChunkNorris = () => {
               <RandomJokes />
             </Route>
             {categories.map((category, index) => (
-              <Route key={index} path={"/chunkNorris/" + category}>
+              <Route key={index} path={URL_BASE + category}>
                 <CategoryJoke category={category} />
               </Route>
             ))}
@@ -71,7 +86,7 @@ const H1 = styled.h1`
   font-size: 38px;
 `;
 
-const ErrorDiv = styled.div`
+const DivError = styled.div`
   color: ${themes.secondaryColor};
   font-weight: ${themes.fontBold};
   text-align: ${themes.textAlign};
@@ -80,20 +95,30 @@ const ErrorDiv = styled.div`
   font-size: 20px;
 `;
 
+const LinkHome = styled(Link)`
+  text-decoration: ${themes.textDecoration};
+  color: ${themes.tertiaryColor};
+  font-weight: ${themes.fontBold};
+
+  &:hover {
+    color: ${themes.primaryColor};
+  }
+`;
+
 const DivHomePage = styled.div`
   list-style: none;
   margin: 30px;
   text-align: ${themes.textAlign};
   font-size: 20px;
+`;
 
-  a {
-    text-decoration: ${themes.textDecoration};
-    color: ${themes.tertiaryColor};
+const LinkCategory = styled(Link)`
+  text-decoration: ${themes.textDecoration};
+  color: ${themes.tertiaryColor};
+
+  &:hover {
+    color: ${themes.primaryColor};
     font-weight: ${themes.fontBold};
-
-    &:hover {
-      color: ${themes.primaryColor};
-    }
   }
 `;
 
@@ -101,19 +126,14 @@ const Li = styled.li`
   list-style: none;
   margin: 10px 20px;
   width: 55px;
-
-  a {
-    text-decoration: ${themes.textDecoration};
-    color: ${themes.tertiaryColor};
-
-    &:hover {
-      color: ${themes.primaryColor};
-      font-weight: ${themes.fontBold};
-    }
-  }
 `;
 const Ul = styled.ul`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+`;
+
+const DivLoading = styled.div`
+  position: relative;
+  left: calc(50% - 100px);
 `;

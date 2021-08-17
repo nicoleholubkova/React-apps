@@ -3,6 +3,7 @@ export const themes = {
   secondaryColor: "red",
   tertiaryColor: "#564e58",
   quaternaryColor: "#252627",
+  quinaryColor: "#F2EFE9",
   primaryFont: "OCR A Std monospace",
   textTransform: "uppercase",
   textDecoration: "none",

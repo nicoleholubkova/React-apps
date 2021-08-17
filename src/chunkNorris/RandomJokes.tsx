@@ -1,4 +1,6 @@
 import { OneJoke } from "./OneJoke";
+import { URL_RANDOM } from "./Config";
+import { removeDuplicite } from "./arrayUtils";
 import { themes } from "./Theme";
 import { useEffect, useState } from "react";
 import loadingGIF from "./Spinner-1s-200px.svg";
@@ -18,56 +20,54 @@ export type JokeType = {
 
 export const RandomJokes = () => {
   const [jokes, setJokes] = useState<JokeType[]>([]);
-  const [error, setError] = useState(null as null | string);
+  const [error, setError] = useState(false);
   const [loadingJokes, setLoadingJokes] = useState(false);
 
-  const isDuplicate = (jokesArray: JokeType[], joke: JokeType): boolean => {
-    return jokesArray.some((j) => j.id === joke.id);
-  };
-
-  const getJokes = async () => {
-    setLoadingJokes(true);
-    const jokesArray: JokeType[] = [];
-    while (jokesArray.length < NUMBER_OF_JOKES) {
-      const response = await fetch("https://api.chucknorris.io/jokes/random");
-      const data: JokeType = await response.json();
-      if (!isDuplicate(jokesArray, data)) {
-        jokesArray.push(data);
-      }
-    }
-    setJokes(jokesArray);
-    setLoadingJokes(false);
-  };
-
   useEffect(() => {
-    try {
-      setError(null);
-      getJokes();
-    } catch (err) {
-      setError(err.toString());
-    }
+    const getJokes = async () => {
+      const jokesArray: JokeType[] = [];
+      try {
+        while (jokesArray.length < NUMBER_OF_JOKES) {
+          setLoadingJokes(true);
+          const response = await fetch(URL_RANDOM);
+          const data: JokeType = await response.json();
+          jokesArray.push(data);
+          const isDuplicate = removeDuplicite(jokesArray);
+          setJokes(isDuplicate);
+          setLoadingJokes(false);
+        }
+      } catch {
+        setError(true);
+        setLoadingJokes(false);
+      }
+    };
+    getJokes();
   }, []);
 
   return (
     <div>
-      <ErrorDiv>{error && <div> Error: {error}</div>}</ErrorDiv>
-      <LoadingDiv>
-        {loadingJokes && <img src={loadingGIF} alt="Loading" />}
-      </LoadingDiv>
+      {loadingJokes ? (
+        <DivLoading>
+          <img src={loadingGIF} alt="Loading" />
+        </DivLoading>
+      ) : null}
+
+      {error ? (
+        <DivError> Unable to get data from ${URL_RANDOM} </DivError>
+      ) : null}
+
       <Ul>
-        {jokes.map((joke) => {
-          return (
-            <Li key={joke.id}>
-              <OneJoke value={joke.value} />
-            </Li>
-          );
-        })}
+        {jokes.map((joke) => (
+          <Li key={joke.id}>
+            <OneJoke value={joke.value} />
+          </Li>
+        ))}
       </Ul>
     </div>
   );
 };
 
-const LoadingDiv = styled.div`
+const DivLoading = styled.div`
   position: relative;
   left: calc(50% - 100px);
 `;
@@ -80,7 +80,7 @@ const Li = styled.li`
 const Ul = styled.ul`
   list-style: none;
 `;
-const ErrorDiv = styled.div`
+const DivError = styled.div`
   color: ${themes.secondaryColor};
   font-weight: ${themes.fontBold};
   text-align: ${themes.textAlign};
