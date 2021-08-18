@@ -52,6 +52,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.2",
+    "@types/react-router-dom": "^5.1.8",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",

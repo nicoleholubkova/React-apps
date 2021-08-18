@@ -1,5 +1,6 @@
 import "./App.css";
-import { CounterInRedux } from "./counterInRedux/CounterApp";
+import { ChunkNorris } from "./chunkNorris/ChunkNorrisApp";
+import { CounterInRedux, store } from "./counterInRedux/CounterApp";
 import { HackerTyper } from "./hackertyper/HackerTyper";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MemoryGameApp } from "./memoryGame/MemoryGameApp";
@@ -8,7 +9,6 @@ import { PostListApp } from "./blogPost/PostListApp";
 import { Provider } from "react-redux";
 import { TicTacToeApp } from "./tic-tac-toe/TicTacToeApp";
 import { ToDoApp } from "./todo/ToDoApp";
-import { store } from "./counterInRedux/CounterApp";
 import { text } from "./hackertyper/Code";
 import styled from "styled-components";
 
@@ -58,6 +58,9 @@ export default function App() {
               <Link to="/memoryGame">Memory game</Link>
             </div>
             <div>
+              <Link to="/chunkNorris">Chuck Norris jokes</Link>
+            </div>
+            <div>
               <Link to="/counterInRedux">Counter in Redux</Link>
             </div>
           </DivWrapper>
@@ -82,12 +85,15 @@ export default function App() {
           <Route path="/memoryGame">
             <MemoryGameApp />
           </Route>
+          <Route path="/chunkNorris">
+            <ChunkNorris />
+          </Route>
           <Provider store={store}>
             <Route path="/counterInRedux">
               <CounterInRedux />
             </Route>
           </Provider>
-          ,
+
           <Route path="/">
             <Paragraph>&#128144;</Paragraph>
           </Route>
