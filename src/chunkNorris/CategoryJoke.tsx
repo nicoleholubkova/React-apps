@@ -31,10 +31,10 @@ export const CategoryJoke = (props: { category: string }) => {
             return;
           }
           setCategoryJokes(isDuplicate);
-          setLoading(false);
         }
       } catch {
         setError(true);
+      } finally {
         setLoading(false);
       }
     };
@@ -44,12 +44,10 @@ export const CategoryJoke = (props: { category: string }) => {
   return (
     <div>
       <H3>{props.category} jokes</H3>
-      {loading ? (
+      {loading && (
         <DivLoading>
           <img src={loadingGIF} alt="Loading" />
         </DivLoading>
-      ) : (
-        ""
       )}
 
       {error ? (

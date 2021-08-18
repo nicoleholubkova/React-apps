@@ -34,10 +34,10 @@ export const RandomJokes = () => {
           jokesArray.push(data);
           const isDuplicate = removeDuplicate(jokesArray);
           setJokes(isDuplicate);
-          setLoadingJokes(false);
         }
       } catch {
         setError(true);
+      } finally {
         setLoadingJokes(false);
       }
     };
@@ -46,11 +46,11 @@ export const RandomJokes = () => {
 
   return (
     <div>
-      {loadingJokes ? (
+      {loadingJokes && (
         <DivLoading>
           <img src={loadingGIF} alt="Loading" />
         </DivLoading>
-      ) : null}
+      )}
 
       {error ? (
         <DivError> Unable to get data from ${URL_RANDOM} </DivError>

@@ -20,9 +20,9 @@ export const ChunkNorris = () => {
         const response = await fetch(URL_ALL_CATEGORIES);
         const data: string[] = await response.json();
         setCategories(data);
-        setLoading(false);
       } catch {
         setError(true);
+      } finally {
         setLoading(false);
       }
     };
@@ -41,11 +41,11 @@ export const ChunkNorris = () => {
             <LinkHome to={"/RandomJokes"}>Home Page</LinkHome>
           </DivHomePage>
 
-          {loading ? (
+          {loading && (
             <DivLoading>
               <img src={loadingGIF} alt="Loading" />
             </DivLoading>
-          ) : null}
+          )}
           {error ? (
             <DivError> Unable to get data from ${URL_ALL_CATEGORIES} </DivError>
           ) : null}
