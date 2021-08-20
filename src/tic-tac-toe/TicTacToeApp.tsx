@@ -5,22 +5,6 @@ import { inherits } from "util";
 import { themes } from "./theme";
 import React, { Component } from "react";
 import styled from "styled-components";
-
-const H1 = styled.h1`
-  text-align: center;
-  font-size: 40px;
-  font-family: ${themes.primaryFont};
-  margin: 50px 0 30px 0;
-`;
-
-const Button = styled.button`
-  text-align: center;
-  position: relative;
-  left: calc(50% - 58px);
-  margin: 0 20px 20px 20px;
-  padding: 5px 10px;
-`;
-
 export interface SquareData {
   value: string;
 }
@@ -139,3 +123,18 @@ export const TicTacToeApp = React.memo(
     );
   })
 );
+
+const H1 = styled.h1`
+  text-align: center;
+  font-size: 40px;
+  font-family: ${themes.primaryFont};
+  margin: 50px 0 30px 0;
+`;
+
+const Button = styled.button`
+  text-align: center;
+  position: relative;
+  left: calc(50% - 58px);
+  margin: 0 20px 20px 20px;
+  padding: 5px 10px;
+`;

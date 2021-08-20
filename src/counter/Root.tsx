@@ -2,34 +2,6 @@ import { Theme } from "./theme";
 import React from "react";
 import styled from "styled-components";
 
-const H1 = styled.h1`
-  text-align: center;
-  font-family: ${Theme.quinary};
-  padding: 40px 0;
-  color: ${Theme.primaryColor};
-`;
-
-const Button = styled.button`
-  text-align: center;
-  font-family: ${Theme.senary};
-  padding: 10px 20px;
-  margin: 8px;
-  position: relative;
-  left: calc(50% - 141px);
-  text-transform: uppercase;
-  background: ${Theme.secondaryColor};
-  color: ${Theme.quaternaryColor};
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-`;
-const DivWrapper = styled.div`
-  background-color: ${Theme.tertiaryColor};
-  margin: 160px 340px;
-  padding: 20px 20px 65px;
-  border-radius: 50%;
-`;
-
 export class MyStateComp extends React.Component<{}, { count: number }> {
   constructor(props) {
     super(props);
@@ -64,3 +36,31 @@ export class MyStateComp extends React.Component<{}, { count: number }> {
     );
   }
 }
+
+const H1 = styled.h1`
+  text-align: center;
+  font-family: ${Theme.quinary};
+  padding: 40px 0;
+  color: ${Theme.primaryColor};
+`;
+
+const Button = styled.button`
+  text-align: center;
+  font-family: ${Theme.senary};
+  padding: 10px 20px;
+  margin: 8px;
+  position: relative;
+  left: calc(50% - 141px);
+  text-transform: uppercase;
+  background: ${Theme.secondaryColor};
+  color: ${Theme.quaternaryColor};
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+`;
+const DivWrapper = styled.div`
+  background-color: ${Theme.tertiaryColor};
+  margin: 160px 340px;
+  padding: 20px 20px 65px;
+  border-radius: 50%;
+`;

@@ -1,51 +1,6 @@
 import { Theme } from "./theme";
 import React from "react";
 import styled from "styled-components";
-
-const InputCheckbox = styled.input`
-  outline: none;
-  cursor: pointer;
-  width: 1.3em;
-  height: 1.3em;
-  background-color: ${Theme.tertiaryColor};
-  border: 1px solid #ddd;
-`;
-
-const DivWrapperItem = styled.div`
-  padding: 13px;
-`;
-const Ul = styled.ul`
-  padding-left: 0;
-  display: inline;
-`;
-
-const DivWrapperInput = styled.div`
-  margin-bottom: 13px;
-`;
-
-const Input = styled.input`
-  padding: 10px 60px 10px 80px;
-  font-family: ${Theme.secondaryFont};
-  font-size: 20px;
-  width: calc(100% - 141px);
-  border: none;
-  border-bottom: 1px solid #ededed;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const DivWrapperLi = styled.div<{ checked: boolean }>`
-  border-bottom: 1px solid #ededed;
-  font-size: 18px;
-  margin: -23px -13px 0 -14px;
-  padding-left: 13%;
-  padding-bottom: 2%;
-  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
-  color: ${(props) => (props.checked ? "#787878" : "black")};
-`;
-
 interface ToDoItem {
   id: number;
   value: string;
@@ -144,3 +99,47 @@ class ToDoForm extends React.Component<
 }
 
 export { ToDoForm, ToDoList };
+
+const InputCheckbox = styled.input`
+  outline: none;
+  cursor: pointer;
+  width: 1.3em;
+  height: 1.3em;
+  background-color: ${Theme.tertiaryColor};
+  border: 1px solid ${Theme.quaternaryColor};
+`;
+
+const DivWrapperItem = styled.div`
+  padding: 13px;
+`;
+const Ul = styled.ul`
+  padding-left: 0;
+  display: inline;
+`;
+
+const DivWrapperInput = styled.div`
+  margin-bottom: 13px;
+`;
+
+const Input = styled.input`
+  padding: 10px 60px 10px 80px;
+  font-family: ${Theme.secondaryFont};
+  font-size: 20px;
+  width: calc(100% - 141px);
+  border: none;
+  border-bottom: 1px solid ${Theme.quinaryColor};
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const DivWrapperLi = styled.div<{ checked: boolean }>`
+  border-bottom: 1px solid ${Theme.quinaryColor};
+  font-size: 18px;
+  margin: -23px -13px 0 -14px;
+  padding-left: 13%;
+  padding-bottom: 2%;
+  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
+  color: ${(props) => (props.checked ? "#787878" : "black")};
+`;

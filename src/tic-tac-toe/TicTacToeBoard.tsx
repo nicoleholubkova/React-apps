@@ -3,12 +3,6 @@ import { TicTacToeSquare } from "./TicTacToeSquare";
 import React from "react";
 import styled from "styled-components";
 
-const DivWrapper = styled.div`
-  margin: 50px auto 100px auto;
-  max-width: 540px;
-  display: flex;
-  flex-wrap: wrap;
-`;
 interface BoardProps {
   squares: SquareData[];
   onClick: (number) => void;
@@ -35,3 +29,10 @@ export class TicTacToeBoard extends React.PureComponent<BoardProps, {}> {
     );
   }
 }
+
+const DivWrapper = styled.div`
+  margin: 50px auto 100px auto;
+  max-width: 540px;
+  display: flex;
+  flex-wrap: wrap;
+`;

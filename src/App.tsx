@@ -2,35 +2,18 @@ import "./App.css";
 import { ChunkNorris } from "./chunkNorris/ChunkNorrisApp";
 import { CounterInRedux, store } from "./counterInRedux/CounterApp";
 import { HackerTyper } from "./hackertyper/HackerTyper";
+import { HomePage } from "./HomePage";
 import { JSHistory } from "./JSHistoryPublicWeb/History";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MemoryGameApp } from "./memoryGame/MemoryGameApp";
 import { MyStateComp } from "./counter/Root";
 import { PostListApp } from "./blogPost/PostListApp";
 import { Provider } from "react-redux";
+import { Theme } from "./Themes";
 import { TicTacToeApp } from "./tic-tac-toe/TicTacToeApp";
 import { ToDoApp } from "./todo/ToDoApp";
 import { text } from "./hackertyper/Code";
 import styled from "styled-components";
-
-const DivWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin: 20px;
-  a {
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  a:hover {
-    color: red;
-  }
-`;
-
-const Paragraph = styled.p`
-  font-size: 180px;
-  text-align: center;
-`;
-
 export default function App() {
   return (
     <Router>
@@ -38,7 +21,7 @@ export default function App() {
         <nav>
           <DivWrapper>
             <div>
-              <Link to="/">Home</Link>
+              <Link to="/HomePage">Home page</Link>
             </div>
             <div>
               <Link to="/JSHistoryPublicWeb">JS history</Link>
@@ -71,6 +54,9 @@ export default function App() {
         </nav>
 
         <Switch>
+          <Route path="/HomePage">
+            <HomePage />
+          </Route>
           <Route path="/JSHistoryPublicWeb">
             <JSHistory />
           </Route>
@@ -100,16 +86,22 @@ export default function App() {
               <CounterInRedux />
             </Route>
           </Provider>
-
-          <Route path="/">
-            <Paragraph>&#128144;</Paragraph>
-          </Route>
         </Switch>
       </div>
     </Router>
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
+const DivWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px;
+  margin-top: 40px;
+  a {
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  a:hover {
+    color: ${Theme.primaryColor};
+  }
+`;
