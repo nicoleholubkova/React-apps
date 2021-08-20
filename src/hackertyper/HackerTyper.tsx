@@ -35,9 +35,7 @@ export class HackerTyper extends Component<{ code: string }, { cut: number }> {
       <div onKeyDown={this.onKeyPressed}>
         <Helmet>
           <style>
-            {
-              "body { background-color: black; font-family: monospace; color: #00FF00; line-height: 2; white-space: pre-line}"
-            }
+            {`body { background-color: ${Themes.secondaryColor}; font-family: monospace; color: ${Themes.primaryColor}; line-height: 2; white-space: pre-line}`}
           </style>
         </Helmet>
         {codeSlice} <BlinkSpan>|</BlinkSpan>

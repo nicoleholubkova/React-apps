@@ -2,6 +2,7 @@ import "./App.css";
 import { ChunkNorris } from "./chunkNorris/ChunkNorrisApp";
 import { CounterInRedux, store } from "./counterInRedux/CounterApp";
 import { HackerTyper } from "./hackertyper/HackerTyper";
+import { JSHistory } from "./JSHistoryPublicWeb/History";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { MemoryGameApp } from "./memoryGame/MemoryGameApp";
 import { MyStateComp } from "./counter/Root";
@@ -40,6 +41,9 @@ export default function App() {
               <Link to="/">Home</Link>
             </div>
             <div>
+              <Link to="/JSHistoryPublicWeb">JS history</Link>
+            </div>
+            <div>
               <Link to="/counter">Counter</Link>
             </div>
             <div>
@@ -67,6 +71,9 @@ export default function App() {
         </nav>
 
         <Switch>
+          <Route path="/JSHistoryPublicWeb">
+            <JSHistory />
+          </Route>
           <Route path="/counter">
             <MyStateComp />
           </Route>

@@ -30,6 +30,14 @@ export enum OnTurn {
   O = "O",
 }
 
+interface Props {
+  resetGame: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  turn: string;
+  counter: number;
+  squares: SquareData[];
+  onClick: (number: any) => void;
+}
+
 export const BOARD_SIZE = 10;
 const SQUARE_COUNT = BOARD_SIZE ** 2;
 export const COUNT_TO_WIN = 5;
@@ -118,8 +126,9 @@ const app = (Comp: any) =>
       );
     }
   };
+
 export const TicTacToeApp = React.memo(
-  app((props) => {
+  app((props: Props) => {
     return (
       <div>
         <H1>Tic Tac Toe</H1>
