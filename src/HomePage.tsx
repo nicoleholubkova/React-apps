@@ -10,14 +10,15 @@ export function HomePage() {
       </Helmet>
       <H1>Welcome </H1>
       <Paragraph>
-        On the top of this page you can take a look some apps I created in
-        React. Source code for individual apps can be found on{" "}
+        On the top of this page you can take a look at some apps I have created
+        in React. Source code for individual apps can be found on{" "}
         <Link
           href="https://github.com/nicoleholubkova/React-apps"
           target="_blank"
         >
-          Github.
+          Github
         </Link>
+        .
       </Paragraph>
     </div>
   );
