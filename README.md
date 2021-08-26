@@ -4,13 +4,13 @@ I created this project with [Create React App](https://github.com/facebook/creat
 
 ### What I used
 
-I used [Typescript](https://www.typescriptlang.org/), components were styled with [Styled Components](https://styled-components.com/) and app Counter in Redux was created with [Redux](https://redux.js.org/).
+I used [Typescript](https://www.typescriptlang.org/), components styled with [Styled Components](https://styled-components.com/) and the Counter in Redux app was created with [Redux](https://redux.js.org/).
 
-In blog app you write your new post in markdown language and posts are synchronized with your local storage.
+In the blog app you can write a new post in markdown, posts are saved in local storage.
 
-Chuck Norris joke database gets random jokes, all categories and random jokes from specific category from (https://api.chucknorris.io/).
+Chuck Norris joke database gets random jokes, list of categories and random jokes from a given category from the [API](https://api.chucknorris.io/).
 
-Counter in Redux is just for demonstration of how to use Redux.
+The Counter in Redux app is just for demonstration of how to use Redux.
 
 ## List of apps
 
