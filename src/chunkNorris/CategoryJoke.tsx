@@ -72,12 +72,14 @@ export const CategoryJoke = (props: { category: string }) => {
 const H3 = styled.h3`
   text-align: ${themes.textAlign};
   text-transform: ${themes.textTransform};
-  color: ${themes.primaryColor};
+  color: ${themes.tertiaryColor};
+  font-family: ${themes.secondaryFont};
 `;
 
 const Li = styled.li`
   list-style: none;
   margin: 0 10px 20px 0;
+  font-family: ${themes.secondaryFont};
 `;
 
 const DivError = styled.div`

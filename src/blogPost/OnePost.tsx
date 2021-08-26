@@ -14,11 +14,11 @@ export const OnePost = (props: { post: PostState }) => {
 };
 
 const DivWrapper = styled.div`
-  display: inline-block;
-  margin: 20px;
+  margin: auto;
   padding: 5px 30px;
   background-color: ${themes.quaternaryColor};
   box-shadow: 1px 1px 11px 7px ${themes.primaryBorderShadowColor};
+  color: ${themes.primaryColor};
 `;
 
 const H3 = styled.h3`

@@ -1,3 +1,4 @@
+import { themes } from "./theme";
 import React from "react";
 import styled from "styled-components";
 
@@ -18,7 +19,8 @@ export class TicTacToeHeader extends React.Component<HeaderProps, {}> {
 }
 
 const DivWrapper = styled.div`
-  text-align: center;
-  margin-bottom: 40px;
+  text-align: ${themes.textAlign};
   line-height: 2;
+  flex-basis: 100%;
+  font-family: ${themes.secondaryFont};
 `;

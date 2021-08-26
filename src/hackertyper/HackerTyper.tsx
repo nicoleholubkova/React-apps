@@ -32,17 +32,22 @@ export class HackerTyper extends Component<{ code: string }, { cut: number }> {
   render() {
     let codeSlice = this.props.code.slice(0, this.state.cut);
     return (
-      <div onKeyDown={this.onKeyPressed}>
+      <DivWrapper onKeyDown={this.onKeyPressed}>
         <Helmet>
           <style>
-            {`body { background-color: ${Themes.secondaryColor}; font-family: monospace; color: ${Themes.primaryColor}; line-height: 2; white-space: pre-line}`}
+            {`body { background-color: ${Themes.secondaryColor}; font-family: monospace; color: ${Themes.primaryColor}}`}
           </style>
         </Helmet>
         {codeSlice} <BlinkSpan>|</BlinkSpan>
-      </div>
+      </DivWrapper>
     );
   }
 }
+
+const DivWrapper = styled.div`
+  line-height: 2;
+  white-space: pre-line;
+`;
 
 const colors = keyframes`
 0% {

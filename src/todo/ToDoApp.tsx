@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Theme } from "./theme";
 import { ToDoForm, ToDoList } from "./ToDo";
 import React from "react";
@@ -61,23 +62,35 @@ export class ToDoApp extends React.Component<{}, { toDoItems: ToDoItem[] }> {
   };
   render() {
     return (
-      <div>
+      <DivWrapper>
+        <Helmet>
+          <style>{`body { background-color: ${Theme.senaryColor};`}</style>
+        </Helmet>
         <H1>To Do List</H1>
         <DiVWrapperApp>
           <ToDoForm addItem={this.addItem} />
           <ToDoList items={this.state.toDoItems} checkItemFn={this.checkItem} />
           <DivCounter>Todos left: {this.getNumberOfToDosLeft()} </DivCounter>
         </DiVWrapperApp>
-      </div>
+      </DivWrapper>
     );
   }
 }
 
+const DivWrapper = styled.div`
+  max-width: 880px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 const DivCounter = styled.div`
-  color: ${Theme.primaryColor};
+  color: ${Theme.secondaryColor};
   font-size: small;
   padding-bottom: 10px;
   padding-left: 10px;
+  font-family: ${Theme.tertiaryFont};
 `;
 
 const DiVWrapperApp = styled.div`
@@ -87,8 +100,8 @@ const DiVWrapperApp = styled.div`
 `;
 
 const H1 = styled.h1`
-  font-size: 60px;
   font-family: ${Theme.primaryFont};
   color: ${Theme.secondaryColor};
-  text-align: center;
+  font-size: 38px;
+  padding-top: 40px;
 `;

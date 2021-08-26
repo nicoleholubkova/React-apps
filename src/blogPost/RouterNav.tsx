@@ -16,12 +16,8 @@ export function RouterNav() {
       <div>
         <Nav>
           <DivLink>
-            <div>
-              <Link to={URL_BASE}>All Posts</Link>
-            </div>
-            <div>
-              <Link to={URL_BASE + "NewPost"}>New Post</Link>
-            </div>
+            <LinkNav to={URL_BASE}>All Posts</LinkNav>
+            <LinkNav to={URL_BASE + "NewPost"}>New Post</LinkNav>
           </DivLink>
         </Nav>
 
@@ -47,18 +43,29 @@ export function RouterNav() {
 }
 
 const Nav = styled.nav`
+  margin: 40px;
+  font-family: ${themes.secondaryFont};
+`;
+
+const LinkNav = styled(Link)`
+  text-decoration: ${themes.primaryTextDecoration};
   text-transform: ${themes.primaryTextTransform};
-  margin: 30px;
-  font-family: ${themes.primaryFont};
-  font-weight: bold;
-  font-size: 20px;
-  a {
-    text-decoration: ${themes.primaryTextDecoration};
-    text-transform: ${themes.primaryTextTransform};
+  color: ${themes.primaryColor};
+  padding: 10px;
+  width: 100%;
+  text-align: ${themes.textAlign};
+  margin: 2px;
+  border: 1px solid ${themes.tertiaryColor};
+  border-radius: 5px;
+
+  &:hover {
+    color: ${themes.quaternaryColor};
+    font-weight: bold;
   }
 `;
 
 const DivLink = styled.div`
   display: flex;
   justify-content: space-evenly;
+  margin: auto;
 `;

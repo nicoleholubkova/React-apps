@@ -18,40 +18,40 @@ export default function App() {
   return (
     <Router>
       <div>
-        <nav>
+        <Nav>
           <DivWrapper>
-            <div>
-              <Link to="/HomePage">Home page</Link>
-            </div>
-            <div>
-              <Link to="/JSHistoryPublicWeb">JS history</Link>
-            </div>
-            <div>
-              <Link to="/counter">Counter</Link>
-            </div>
-            <div>
-              <Link to="/todo">To Do List</Link>
-            </div>
-            <div>
-              <Link to="/hackertyper">Hacker Typer</Link>
-            </div>
-            <div>
-              <Link to="/tic-tac-toe">Tic-Tac-Toe</Link>
-            </div>
-            <div>
-              <Link to="/blogPost">Blog post</Link>
-            </div>
-            <div>
-              <Link to="/memoryGame">Memory game</Link>
-            </div>
-            <div>
-              <Link to="/chunkNorris">Chuck Norris jokes</Link>
-            </div>
-            <div>
-              <Link to="/counterInRedux">Counter in Redux</Link>
-            </div>
+            <DivWrapperLink>
+              <LinkNavig to="/HomePage">Home page</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/JSHistoryPublicWeb">JS history</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/counter">Counter app</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/todo">To Do List</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/hackertyper">Hacker Typer</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/tic-tac-toe">Tic-Tac-Toe</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/blogPost">Blog post</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/memoryGame">Memory game</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/chunkNorris">Chuck Norris jokes</LinkNavig>
+            </DivWrapperLink>
+            <DivWrapperLink>
+              <LinkNavig to="/counterInRedux">Counter in Redux</LinkNavig>
+            </DivWrapperLink>
           </DivWrapper>
-        </nav>
+        </Nav>
 
         <Switch>
           <Route path="/HomePage">
@@ -92,16 +92,31 @@ export default function App() {
   );
 }
 
+const DivWrapperLink = styled.div`
+  background: ${Theme.senaryColor};
+  border: 1px solid ${Theme.secondaryColor};
+  padding: 5px;
+  text-align: center;
+`;
+
 const DivWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  margin: 20px;
-  margin-top: 40px;
-  a {
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  a:hover {
+  margin-top: 20px;
+`;
+
+const LinkNavig = styled(Link)`
+  text-decoration: none;
+  text-transform: uppercase;
+  color: ${Theme.secondaryColor};
+  width: 100%;
+  display: inline-block;
+
+  &:hover {
     color: ${Theme.primaryColor};
   }
+`;
+
+const Nav = styled.nav`
+  max-width: 880px;
+  margin: auto;
 `;

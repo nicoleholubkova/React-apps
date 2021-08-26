@@ -1,10 +1,10 @@
 export const themes = {
-  primaryColor: "#575a5e",
-  secondaryColor: "#222823",
-  tertiaryColor: "#a7a2a9",
-  quaternaryColor: "#64707c",
-  quinaryColor: "white",
-  primaryFont: "URW Chancery L, cursive",
-  textTransform: "uppercase",
+  primaryColor: "#8f91a2",
+  secondaryColor: "#343f3e",
+  tertiaryColor: "#505A5B",
+  quaternaryColor: "#DCEDFF",
+  quinaryColor: "#FFFFFF",
+  primaryFont: "Avantgarde,TeX Gyre Adventor,URW Gothic L,sans-serif;",
+  secondaryFont: "Optima, sans-serif",
   textAlign: "center",
 };

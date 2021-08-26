@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Theme } from "./Theme";
 import { combineReducers, createStore } from "redux";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,8 +61,12 @@ export const CounterInRedux = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <H1>Your current number is:{count} </H1>
+    <DivWrapper>
+      <Helmet>
+        <style>{`body { background-color: ${Theme.quinaryColor}}}`}</style>
+      </Helmet>
+      <H1>Counter in Redux </H1>
+      <H2>Your current number is: {count} </H2>
       <Button onClick={() => dispatch(buttonsAction().onIncrement1())}>
         increment 1
       </Button>
@@ -86,32 +91,45 @@ export const CounterInRedux = () => {
       <Button onClick={() => dispatch(buttonsAction().onSquareRoot())}>
         square root of current number
       </Button>
-    </div>
+    </DivWrapper>
   );
 };
 
 const H1 = styled.h1`
   text-align: ${Theme.textAlign};
   font-family: ${Theme.primaryFont};
-  padding: 40px 0;
+  padding-top: 40px;
   color: ${Theme.primaryColor};
+  font-size: 38px;
 `;
-const Button = styled.button`
+
+const H2 = styled.h2`
   text-align: ${Theme.textAlign};
   font-family: ${Theme.secondaryFont};
+  padding-bottom: 40px;
+  color: ${Theme.secondaryColor};
+  width: 100%;
+  font-weight: inherit;
+`;
+const Button = styled.button`
+  font-family: ${Theme.secondaryFont};
   padding: 10px 20px;
-  margin: 8px;
+  margin: 15px;
   text-transform: ${Theme.textTransform};
   background: ${Theme.secondaryColor};
   color: ${Theme.quaternaryColor};
   border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    background: ${Theme.tertiaryColor};
+  }
 `;
 
 const DivWrapper = styled.div`
-  background-color: ${Theme.tertiaryColor};
-  margin: 100px 200px;
-  padding: 20px 20px 65px;
-  border-radius: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 880px;
+  margin: auto;
 `;

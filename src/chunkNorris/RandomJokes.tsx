@@ -75,10 +75,12 @@ const DivLoading = styled.div`
 const Li = styled.li`
   margin: 15px 20px;
   font-size: 15px;
+  font-family: ${themes.secondaryFont};
 `;
 
 const Ul = styled.ul`
   list-style: none;
+  padding: 0;
 `;
 const DivError = styled.div`
   color: ${themes.secondaryColor};

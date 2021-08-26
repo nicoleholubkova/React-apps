@@ -28,13 +28,17 @@ export const AllPosts = () => {
 const DivWrapper = styled.div`
   margin: 25px;
   line-height: 1.5;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 880px;
 
   a {
     text-decoration: ${themes.primaryTextDecoration};
     color: ${themes.tertiaryColor};
+    padding: 10px;
 
     &:hover {
-      color: ${themes.secondaryColor};
+      color: ${themes.primaryColor};
     }
   }
 `;

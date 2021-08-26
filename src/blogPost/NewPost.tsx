@@ -67,11 +67,13 @@ export const NewPost = () => {
         </InputDiv>
         <InputDiv>
           <Label>Text Area</Label>
-          <MarkdownTextarea
-            source={postText}
-            callback={(val: React.SetStateAction<string>) => setPostText(val)}
-            verticalAutoResize={false}
-          />
+          <Textarea>
+            <MarkdownTextarea
+              source={postText}
+              callback={(val: React.SetStateAction<string>) => setPostText(val)}
+              verticalAutoResize={false}
+            />
+          </Textarea>
         </InputDiv>
         <div>
           <Button onClick={onSubmit}>Submit</Button>
@@ -80,6 +82,10 @@ export const NewPost = () => {
     </div>
   );
 };
+
+const Textarea = styled.div`
+  margin: 5px 22px;
+`;
 
 const DivError = styled.div`
   font-size: 17px;
@@ -91,18 +97,24 @@ const DivError = styled.div`
 const Label = styled.label`
   text-transform: ${themes.primaryTextTransform};
   margin: 5px 22px;
-  font-size: 18px;
+  color: ${themes.primaryColor};
+  font-family: ${themes.secondaryFont};
 `;
 
 const Button = styled.button`
-  text-align: ${themes.textAlign};
   margin: 0 20px 20px 20px;
-  padding: 5px 10px;
-  width: 100px;
-  height: 50px;
-  font-size: 20px;
+  padding: 10px 20px;
+  font-size: 15px;
   position: relative;
   top: 50px;
+  border-radius: 5px;
+  background: ${themes.tertiaryColor};
+  color: ${themes.secondaryColor};
+
+  &:hover {
+    background: ${themes.quaternaryColor};
+    cursor: pointer;
+  }
 `;
 
 const Input = styled.input`
@@ -115,8 +127,7 @@ const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
   max-width: 800px;
-  left: 24%;
-  position: relative;
+  margin: auto;
 `;
 
 const InputDiv = styled.div`

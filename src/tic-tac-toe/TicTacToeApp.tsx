@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { TicTacToeBoard } from "./TicTacToeBoard";
 import { TicTacToeHeader } from "./TicTacToeHeader";
 import { checkAll } from "./WinLogic";
@@ -114,27 +115,47 @@ const app = (Comp: any) =>
 export const TicTacToeApp = React.memo(
   app((props: Props) => {
     return (
-      <div>
+      <DivWrapper>
+        <Helmet>
+          <style>{`body { background-color: ${themes.tertiaryColor};`}</style>
+        </Helmet>
         <H1>Tic Tac Toe</H1>
         <Button onClick={props.resetGame}>New Game</Button>
         <TicTacToeHeader turn={props.turn} counter={props.counter} />
         <TicTacToeBoard squares={props.squares} onClick={props.onClick} />
-      </div>
+      </DivWrapper>
     );
   })
 );
 
+const DivWrapper = styled.div`
+  max-width: 880px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 const H1 = styled.h1`
-  text-align: center;
-  font-size: 40px;
+  text-align: ${themes.textAlign};
+  font-size: 38px;
+  padding-top: 40px;
   font-family: ${themes.primaryFont};
-  margin: 50px 0 30px 0;
+  flex-basis: 100%;
+  color: ${themes.secondaryColor};
 `;
 
 const Button = styled.button`
-  text-align: center;
-  position: relative;
-  left: calc(50% - 58px);
+  text-align: ${themes.textAlign};
   margin: 0 20px 20px 20px;
-  padding: 5px 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: ${themes.secondaryFont};
+  color: ${themes.quaternaryColor};
+  background-color: ${themes.primaryColor};
+
+  &:hover {
+    background-color: ${themes.quinaryColor};
+    cursor: pointer;
+  }
 `;

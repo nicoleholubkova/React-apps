@@ -24,10 +24,10 @@ export class TicTacToeSquare extends React.Component<SquareProps, {}> {
 
 const DivWrapper = styled.div`
   border: 2px solid ${themes.secondaryColor};
-  background-color: ${themes.primaryColor};
-  color: ${themes.secondaryColor};
+  background-color: ${themes.quinaryColor};
+  color: ${themes.tertiaryColor};
   min-width: 50px;
   height: 50px;
-  text-align: center;
+  text-align: ${themes.textAlign};
   font-size: 30px;
 `;

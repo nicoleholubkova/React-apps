@@ -30,64 +30,67 @@ export const ChunkNorris = () => {
   }, []);
 
   return (
-    <div>
+    <DivWrapper>
       <Helmet>
         <style>{`body { background-color: ${themes.quinaryColor}}`}</style>
       </Helmet>
-      <div>
-        <H1>Chuck Norris jokes</H1>
-        <Router>
-          <DivHomePage>
-            <LinkHome to={"/RandomJokes"}>Home Page</LinkHome>
-          </DivHomePage>
 
-          {loading && (
-            <DivLoading>
-              <img src={loadingGIF} alt="Loading" />
-            </DivLoading>
-          )}
-          {error ? (
-            <DivError> Unable to get data from ${URL_ALL_CATEGORIES} </DivError>
-          ) : null}
+      <H1>Chuck Norris jokes</H1>
+      <Router>
+        {loading && (
+          <DivLoading>
+            <img src={loadingGIF} alt="Loading" />
+          </DivLoading>
+        )}
+        {error ? (
+          <DivError> Unable to get data from ${URL_ALL_CATEGORIES} </DivError>
+        ) : null}
 
-          <Ul>
-            {categories.map((category) => {
-              return (
-                <Li key={category}>
-                  <LinkCategory to={URL_BASE + category}>
-                    {category}
-                  </LinkCategory>
-                </Li>
-              );
-            })}
-          </Ul>
+        <DivHomePage>
+          <LinkHome to={"/RandomJokes"}>Random jokes</LinkHome>
+        </DivHomePage>
 
-          <Switch>
-            <Route path={"/RandomJokes"}>
-              <RandomJokes />
+        <Ul>
+          {categories.map((category) => {
+            return (
+              <Li key={category}>
+                <LinkCategory to={URL_BASE + category}>{category}</LinkCategory>
+              </Li>
+            );
+          })}
+        </Ul>
+
+        <Switch>
+          <Route path={"/RandomJokes"}>
+            <RandomJokes />
+          </Route>
+          {categories.map((category, index) => (
+            <Route key={index} path={URL_BASE + category}>
+              <CategoryJoke category={category} />
             </Route>
-            {categories.map((category, index) => (
-              <Route key={index} path={URL_BASE + category}>
-                <CategoryJoke category={category} />
-              </Route>
-            ))}
-          </Switch>
-        </Router>
-      </div>
-    </div>
+          ))}
+        </Switch>
+      </Router>
+    </DivWrapper>
   );
 };
 
+const DivWrapper = styled.div`
+  margin: auto;
+  max-width: 880px;
+`;
+
 const H1 = styled.h1`
   text-align: ${themes.textAlign};
-  text-transform: ${themes.textTransform};
   font-family: ${themes.primaryFont};
-  color: ${themes.quaternaryColor};
+  color: ${themes.secondaryColor};
   font-size: 38px;
+  padding-top: 40px;
 `;
 
 const DivError = styled.div`
   color: ${themes.secondaryColor};
+  font-family: ${themes.secondaryFont};
   font-weight: ${themes.fontBold};
   text-align: ${themes.textAlign};
   margin: 50px;
@@ -99,6 +102,11 @@ const LinkHome = styled(Link)`
   text-decoration: ${themes.textDecoration};
   color: ${themes.tertiaryColor};
   font-weight: ${themes.fontBold};
+  font-family: ${themes.secondaryFont};
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 10px 10px 0;
 
   &:hover {
     color: ${themes.primaryColor};
@@ -107,14 +115,21 @@ const LinkHome = styled(Link)`
 
 const DivHomePage = styled.div`
   list-style: none;
-  margin: 30px;
-  text-align: ${themes.textAlign};
+  margin: 10px auto;
+  width: 180px;
+  padding: 10px;
   font-size: 20px;
+  border: 1px solid #505a5b;
+  border-radius: 5px;
 `;
 
 const LinkCategory = styled(Link)`
   text-decoration: ${themes.textDecoration};
   color: ${themes.tertiaryColor};
+  font-family: ${themes.secondaryFont};
+  padding: 10px;
+  width: 100%;
+  text-align: center;
 
   &:hover {
     color: ${themes.primaryColor};
@@ -124,13 +139,20 @@ const LinkCategory = styled(Link)`
 
 const Li = styled.li`
   list-style: none;
-  margin: 10px 20px;
-  width: 55px;
+  margin: 2px;
+  border: 1px solid ${themes.tertiaryColor};
+  border-radius: 5px;
+  display: flex;
+  min-width: 110px;
+  font-family: ${themes.secondaryFont};
 `;
+
 const Ul = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 0;
 `;
 
 const DivLoading = styled.div`

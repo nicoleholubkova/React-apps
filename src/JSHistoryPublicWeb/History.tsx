@@ -9,11 +9,9 @@ import styled from "styled-components";
 
 export function JSHistory() {
   return (
-    <div>
+    <DivWrapperMain>
       <Helmet>
-        <style>
-          {`body { background-color:${themes.primaryColor}; line-height: 1.6; padding: 40px 40px 20px 40px;}`}
-        </style>
+        <style>{`body { background-color:${themes.primaryColor};}`}</style>
       </Helmet>
       <Header>
         <H1>The History of JavaScript</H1>
@@ -147,9 +145,14 @@ export function JSHistory() {
           JavaScript is going to be with us for many years to come.
         </Paragraph>
       </DivWrapper>
-    </div>
+    </DivWrapperMain>
   );
 }
+
+const DivWrapperMain = styled.div`
+  max-width: 880px;
+  margin: auto;
+`;
 
 const Header = styled.header`
   display: flex;
@@ -159,18 +162,20 @@ const H1 = styled.h1`
   color: ${themes.secondaryColor};
   font-family: ${themes.primaryFont};
   text-align: ${themes.textAlign};
-  font-size: 48px;
+  font-size: 38px;
   flex-basis: 100%;
+  padding-top: 40px;
 `;
 
 const Paragraph = styled.p`
   color: ${themes.tertiaryColor};
   font-family: ${themes.secondaryFont};
+  line-height: 1.6;
 `;
 
 const H2 = styled.h2`
-  color: ${themes.quaternaryColor};
-  font-family: ${themes.primaryFont};
+  color: ${themes.tertiaryColor};
+  font-family: ${themes.secondaryFont};
   font-size: 33px;
   text-align: ${themes.textAlign};
 `;
@@ -190,17 +195,19 @@ const Li = styled.li`
   text-align: ${themes.textAlign};
   flex-basis: 25%;
   border: 1px solid ${themes.tertiaryColor};
+  border-radius: 5px;
+  margin: 2px;
 `;
 
 const Link = styled.a`
   text-decoration: none;
-  color: ${themes.quaternaryColor};
-  font-family: ${themes.primaryFont};
+  color: ${themes.tertiaryColor};
+  font-family: ${themes.secondaryFont};
   display: block;
   padding: 6px;
 
   &:hover {
-    color: ${themes.secondaryColor};
+    color: ${themes.quaternaryColor};
   }
 `;
 

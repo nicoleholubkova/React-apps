@@ -1,10 +1,11 @@
 export const Theme = {
-  primaryColor: "#322214",
-  secondaryColor: "#4C443C",
-  tertiaryColor: "#93A3B1",
-  quaternaryColor: "white",
-  primaryFont: "Brush Script MT, cursive",
-  secondaryFont: "Helvetica, Sans-serif",
+  primaryColor: "#343F3E",
+  secondaryColor: "#505A5B",
+  tertiaryColor: "#8f91a2",
+  quaternaryColor: "#FFFFFF",
+  quinaryColor: "#DCEDFF",
+  primaryFont: "Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif",
+  secondaryFont: "Optima, sans-serif",
   textTransform: "uppercase",
   textAlign: "center",
 };

@@ -14,7 +14,7 @@ export class TicTacToeBoard extends React.PureComponent<BoardProps, {}> {
   }
   render() {
     return (
-      <div>
+      <DivMainWrapper>
         <DivWrapper>
           {this.props.squares.map((square, index) => (
             <TicTacToeSquare
@@ -25,10 +25,15 @@ export class TicTacToeBoard extends React.PureComponent<BoardProps, {}> {
             />
           ))}
         </DivWrapper>
-      </div>
+      </DivMainWrapper>
     );
   }
 }
+
+const DivMainWrapper = styled.div`
+  flex-basis: 100%;
+  margin-top: -25px;
+`;
 
 const DivWrapper = styled.div`
   margin: 50px auto 100px auto;

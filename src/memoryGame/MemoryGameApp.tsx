@@ -113,21 +113,29 @@ export const MemoryGameApp = () => {
   };
 
   return (
-    <div>
+    <DivWrapper>
       <Helmet>
-        <style>{"body { background-color: #F4F7F5}"}</style>
+        <style>{`body { background-color: ${themes.quaternaryColor}}`}</style>
       </Helmet>
       <H1>Memory game</H1>
       <Newgame startNewGame={startNewGame} moves={moves} />
       <CardGrid cards={cards} selectCard={selectCard} />
-    </div>
+    </DivWrapper>
   );
 };
 
+const DivWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 880px;
+  margin: auto;
+`;
+
 const H1 = styled.h1`
   text-align: ${themes.textAlign};
-  text-transform: ${themes.textTransform};
-  margin: 30px;
+  font-size: 38px;
+  padding-top: 40px;
   color: ${themes.secondaryColor};
   font-family: ${themes.primaryFont};
+  margin: 0 auto 20px auto;
 `;

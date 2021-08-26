@@ -127,7 +127,7 @@ const Input = styled.input`
   font-size: 20px;
   width: calc(100% - 141px);
   border: none;
-  border-bottom: 1px solid ${Theme.quinaryColor};
+  border-bottom: 1px solid ${Theme.quaternaryColor};
 
   &:focus {
     outline: none;
@@ -135,7 +135,7 @@ const Input = styled.input`
 `;
 
 const DivWrapperLi = styled.div<{ checked: boolean }>`
-  border-bottom: 1px solid ${Theme.quinaryColor};
+  border-bottom: 1px solid ${Theme.quaternaryColor};
   font-size: 18px;
   margin: -23px -13px 0 -14px;
   padding-left: 13%;

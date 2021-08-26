@@ -74,21 +74,26 @@ export const PostListApp = () => {
 
   return (
     <PostsContext.Provider value={{ posts, addPost }}>
-      <div>
+      <DivWrapper>
         <Helmet>
-          <style>{"body { background-color: #CEE5F2}"}</style>
+          <style>{`body { background-color: ${themes.senaryColor}}`}</style>
         </Helmet>
-        <H1>Blog Post</H1>
+        <H1>Blog post</H1>
         <RouterNav />
-      </div>
+      </DivWrapper>
     </PostsContext.Provider>
   );
 };
 
+const DivWrapper = styled.div`
+  max-width: 880px;
+  margin: auto;
+`;
+
 const H1 = styled.h1`
   color: ${themes.primaryColor};
   text-align: ${themes.textAlign};
-  text-transform: ${themes.primaryTextTransform};
-  margin: 30px;
+  padding-top: 40px;
+  font-size: 38px;
   font-family: ${themes.primaryFont};
 `;
