@@ -1,6 +1,6 @@
 import { PostState } from "./PostListApp";
 import { themes } from "./Theme";
-import ReactMarkdown from "react-markdown";
+import Markdown from "markdown-to-jsx";
 import styled from "styled-components";
 
 export const OnePost = (props: { post: PostState }) => {
@@ -8,7 +8,7 @@ export const OnePost = (props: { post: PostState }) => {
     <DivWrapper>
       <H3>{props.post.postTitle}</H3>
       <H6>from {props.post.authorName}</H6>
-      <ReactMarkdown>{props.post.postText}</ReactMarkdown>
+      <Markdown>{props.post.postText}</Markdown>
     </DivWrapper>
   );
 };

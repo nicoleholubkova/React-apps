@@ -1,4 +1,3 @@
-import { MarkdownTextarea } from "markdown-textarea-react";
 import { PostsContext } from "./PostListApp";
 import { themes } from "./Theme";
 import React, { useContext, useState } from "react";
@@ -67,13 +66,12 @@ export const NewPost = () => {
         </InputDiv>
         <InputDiv>
           <Label>Text Area</Label>
-          <Textarea>
-            <MarkdownTextarea
-              source={postText}
-              callback={(val: React.SetStateAction<string>) => setPostText(val)}
-              verticalAutoResize={false}
-            />
-          </Textarea>
+          <textarea
+            required
+            placeholder="#markdown"
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
+          ></textarea>
         </InputDiv>
         <div>
           <Button onClick={onSubmit}>Submit</Button>
@@ -82,14 +80,6 @@ export const NewPost = () => {
     </div>
   );
 };
-
-const Textarea = styled.div`
-  margin: 5px 22px;
-
-  @media (max-width: 480px) {
-    margin: 5px 4px;
-  }
-`;
 
 const DivError = styled.div`
   font-size: 17px;
