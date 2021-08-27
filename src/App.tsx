@@ -21,7 +21,7 @@ export default function App() {
         <Nav>
           <DivWrapper>
             <DivWrapperLink>
-              <LinkNavig to="/HomePage">Home page</LinkNavig>
+              <LinkNavig to="/">Home page</LinkNavig>
             </DivWrapperLink>
             <DivWrapperLink>
               <LinkNavig to="/JSHistoryPublicWeb">JS history</LinkNavig>
@@ -55,9 +55,6 @@ export default function App() {
 
         <Switch>
           <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/HomePage">
             <HomePage />
           </Route>
           <Route path="/JSHistoryPublicWeb">
