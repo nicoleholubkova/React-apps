@@ -54,6 +54,9 @@ export default function App() {
         </Nav>
 
         <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
           <Route path="/HomePage">
             <HomePage />
           </Route>
@@ -86,9 +89,6 @@ export default function App() {
               <CounterInRedux />
             </Route>
           </Provider>
-          <Route path="/">
-            <HomePage />
-          </Route>
         </Switch>
       </div>
     </Router>
