@@ -13,14 +13,16 @@ export class HackerTyper extends Component<{ code: string }, { cut: number }> {
 
   componentDidMount() {
     document.addEventListener("keydown", this.onKeyPressed);
+    document.addEventListener("mousedown", this.onKeyPressed);
   }
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.onKeyPressed);
+    document.removeEventListener("mousedown", this.onKeyPressed);
   }
 
   onKeyPressed = (e) => {
-    if (!e.key) {
+    if (!e.key && !e.button) {
       return;
     }
 
@@ -32,7 +34,7 @@ export class HackerTyper extends Component<{ code: string }, { cut: number }> {
   render() {
     let codeSlice = this.props.code.slice(0, this.state.cut);
     return (
-      <DivWrapper onKeyDown={this.onKeyPressed}>
+      <DivWrapper onKeyDown={this.onKeyPressed} onMouseDown={this.onKeyPressed}>
         <Helmet>
           <style>
             {`body { background-color: ${Themes.secondaryColor}; font-family: monospace; color: ${Themes.primaryColor}}`}
