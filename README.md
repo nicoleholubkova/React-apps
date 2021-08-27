@@ -16,38 +16,39 @@ The Counter in Redux app is just for demonstration of how to use Redux.
 
 - JS history public web
 
-![JS history](https://user-images.githubusercontent.com/89244682/130316527-cceda805-2267-485d-b59f-6659cf83f3d5.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132589-b9eea28d-064e-451d-896d-ca991f320351.JPG" width="500">
 
 - Simple counter app
 
-![Counter](https://user-images.githubusercontent.com/89244682/130316530-200f6449-2bfd-4382-9c0b-01ed5cd386f3.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132615-2571168b-275a-40ed-8679-cf8308613a5b.JPG" width="500">
 
 - Hacker-typer
 
-![hackertyper](https://user-images.githubusercontent.com/89244682/130316539-a8717dac-5fd8-4228-8678-9d36208daadf.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132676-354c86fe-2548-4e9d-97a0-8a05a208cb24.JPG" width="500">
 
 - To do app
 
-![To Do](https://user-images.githubusercontent.com/89244682/130316544-0b5499a6-5822-42bd-9dad-147a92e4e4ec.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132701-15c9754d-42fe-4756-a3c9-3c2e7feab11e.JPG" width="500">
 
 - Tic-tac-toe
 
-![Tic-Tac-Toe](https://user-images.githubusercontent.com/89244682/130316548-adf8ae3c-8ed4-4273-a1bb-21474b7a358b.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132731-ac81c5dd-06ab-48fe-88a8-f6d4dc7c8fc2.JPG" width="500">
 
 - Memory game
 
-![Memory game](https://user-images.githubusercontent.com/89244682/130316551-dbf61875-8c2c-4e1d-8b30-0d07d69c2b52.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132754-669c3981-ce36-4bd3-8ba3-edff84d757fd.JPG" width="500">
 
 - Blog with markdown textarea
 
-![Blog post - new post](https://user-images.githubusercontent.com/89244682/130316553-ed8aa5f5-14a5-47a7-ac8e-0f41436cb82c.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132793-7ea5972d-b855-42f3-8528-4cc60369a40f.JPG" width="500">
 
-![Blog post - all posts - detail](https://user-images.githubusercontent.com/89244682/130316558-b005fd8b-ba7f-405e-8fb3-cd3de8d513f2.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131132880-1d7653e1-e34d-4fc8-93a6-504b46f4b228.JPG" width="500">
 
 - Chuck Norris joke database
 
-![Chuck Norris](https://user-images.githubusercontent.com/89244682/130316562-3c8d9814-84f3-4e7d-ab7d-b14a50715fe6.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131133010-3edd700e-cdea-4a8f-9c61-27778405b72b.JPG" width="500">
 
 - Counter in Redux
 
-![Counter in Redux](https://user-images.githubusercontent.com/89244682/130316567-ad374e47-9971-4c78-828d-b023b566f76f.JPG)
+<img src="https://user-images.githubusercontent.com/89244682/131133028-fb93b0b1-1c66-4ebe-a4a8-065b2014679f.JPG" width="500">
+
