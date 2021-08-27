@@ -78,6 +78,11 @@ export const ChunkNorris = () => {
 const DivWrapper = styled.div`
   margin: auto;
   max-width: 880px;
+
+  @media (max-width: 480px) {
+    max-width: 460px;
+    margin: auto;
+  }
 `;
 
 const H1 = styled.h1`

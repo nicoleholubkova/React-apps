@@ -88,6 +88,11 @@ export const PostListApp = () => {
 const DivWrapper = styled.div`
   max-width: 880px;
   margin: auto;
+
+  @media (max-width: 480px) {
+    max-width: 460px;
+    margin: auto;
+  }
 `;
 
 const H1 = styled.h1`

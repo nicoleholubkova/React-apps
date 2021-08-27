@@ -31,4 +31,9 @@ const DivWrapperCard = styled.div`
   transition: 0.3s;
   text-align: ${themes.textAlign};
   font-size: 75px;
+
+  @media (max-width: 480px) {
+    height: auto;
+    font-size: 68px;
+  }
 `;

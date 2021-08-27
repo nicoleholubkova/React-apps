@@ -40,4 +40,8 @@ const DivWrapper = styled.div`
   max-width: 540px;
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    margin: 50px 10px;
+  }
 `;

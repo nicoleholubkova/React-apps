@@ -85,6 +85,10 @@ export const NewPost = () => {
 
 const Textarea = styled.div`
   margin: 5px 22px;
+
+  @media (max-width: 480px) {
+    margin: 5px 4px;
+  }
 `;
 
 const DivError = styled.div`
@@ -115,6 +119,11 @@ const Button = styled.button`
     background: ${themes.quaternaryColor};
     cursor: pointer;
   }
+
+  @media (max-width: 480px) {
+    margin-right: 127px;
+    top: 25px;
+  }
 `;
 
 const Input = styled.input`
@@ -133,4 +142,9 @@ const Form = styled.form`
 const InputDiv = styled.div`
   width: 50%;
   margin: 15px 0 55px 0;
+
+  @media (max-width: 480px) {
+    margin: auto auto 60px auto;
+    width: 45%;
+  }
 `;

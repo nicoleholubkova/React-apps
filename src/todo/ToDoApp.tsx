@@ -83,6 +83,11 @@ const DivWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  @media (max-width: 480px) {
+    max-width: 460px;
+    margin: auto;
+  }
 `;
 
 const DivCounter = styled.div`
@@ -97,6 +102,10 @@ const DiVWrapperApp = styled.div`
   margin: 0 25%;
   position: relative;
   box-shadow: ${Theme.primaryShadow};
+
+  @media (max-width: 480px) {
+    margin: 0;
+  }
 `;
 
 const H1 = styled.h1`

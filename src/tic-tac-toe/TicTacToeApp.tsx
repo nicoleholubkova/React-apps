@@ -134,6 +134,11 @@ const DivWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  @media (max-width: 480px) {
+    max-width: 460px;
+    margin: auto;
+  }
 `;
 
 const H1 = styled.h1`

@@ -30,4 +30,9 @@ const DivWrapper = styled.div`
   height: 50px;
   text-align: ${themes.textAlign};
   font-size: 30px;
+
+  @media (max-width: 480px) {
+    min-width: 40px;
+    height: 40px;
+  }
 `;

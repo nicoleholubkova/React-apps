@@ -152,6 +152,11 @@ export function JSHistory() {
 const DivWrapperMain = styled.div`
   max-width: 880px;
   margin: auto;
+
+  @media (max-width: 480px) {
+    max-width: 460px;
+    margin: auto;
+  }
 `;
 
 const Header = styled.header`
@@ -197,6 +202,10 @@ const Li = styled.li`
   border: 1px solid ${themes.tertiaryColor};
   border-radius: 5px;
   margin: 2px;
+
+  @media (max-width: 480px) {
+    margin: 0;
+  }
 `;
 
 const Link = styled.a`
@@ -226,6 +235,12 @@ const ImgECMA = styled.img`
 const ImgLogo = styled.img`
   width: 100px;
   height: 100px;
+  margin-top: 10px;
+
+  @media (max-width: 480px) {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 const DivWrapper = styled.div`
