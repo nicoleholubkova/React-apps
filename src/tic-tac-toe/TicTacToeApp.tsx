@@ -137,7 +137,6 @@ const DivWrapper = styled.div`
 
   @media (max-width: 480px) {
     max-width: 460px;
-    margin: auto;
   }
 `;
 

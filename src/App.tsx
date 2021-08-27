@@ -105,6 +105,11 @@ const DivWrapperLink = styled.div`
 const DivWrapper = styled.div`
   display: flex;
   margin-top: 20px;
+
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const LinkNavig = styled(Link)`
@@ -122,4 +127,8 @@ const LinkNavig = styled(Link)`
 const Nav = styled.nav`
   max-width: 880px;
   margin: auto;
+
+  @media (max-width: 480px) {
+    max-width: 460px;
+  }
 `;

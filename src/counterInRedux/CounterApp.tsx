@@ -124,6 +124,10 @@ const Button = styled.button`
     cursor: pointer;
     background: ${Theme.tertiaryColor};
   }
+
+  @media (max-width: 480px) {
+    margin: 10px;
+  }
 `;
 
 const DivWrapper = styled.div`
@@ -135,6 +139,5 @@ const DivWrapper = styled.div`
 
   @media (max-width: 480px) {
     max-width: 460px;
-    margin: auto;
   }
 `;
