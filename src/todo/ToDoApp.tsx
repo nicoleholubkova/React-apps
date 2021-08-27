@@ -101,10 +101,7 @@ const DiVWrapperApp = styled.div`
   margin: 0 25%;
   position: relative;
   box-shadow: ${Theme.primaryShadow};
-
-  @media (max-width: 480px) {
-    margin: 0;
-  }
+  min-width: 360px;
 `;
 
 const H1 = styled.h1`
