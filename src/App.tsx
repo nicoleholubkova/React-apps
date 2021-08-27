@@ -105,11 +105,8 @@ const DivWrapperLink = styled.div`
 const DivWrapper = styled.div`
   display: flex;
   margin-top: 20px;
-
-  @media (max-width: 480px) {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const LinkNavig = styled(Link)`
