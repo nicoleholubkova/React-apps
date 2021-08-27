@@ -3,6 +3,5 @@ export const Theme = {
   secondaryColor: "#DCEDFF",
   tertiaryColor: "#373737",
   quaternaryColor: "#152614",
-  quinaryColor: "#4c6663",
   senaryColor: "#343f3e",
 };

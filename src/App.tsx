@@ -86,6 +86,9 @@ export default function App() {
               <CounterInRedux />
             </Route>
           </Provider>
+          <Route path="/">
+            <HomePage />
+          </Route>
         </Switch>
       </div>
     </Router>
