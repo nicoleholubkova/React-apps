@@ -4,7 +4,7 @@ export const themes = {
   tertiaryColor: "#505A5B",
   quaternaryColor: "#DCEDFF",
   quinaryColor: "#FFFFFF",
-  primaryFont: "Avantgarde,TeX Gyre Adventor,URW Gothic L,sans-serif;",
+  primaryFont: "Avantgarde,TeX Gyre Adventor,URW Gothic L,sans-serif",
   secondaryFont: "Optima, sans-serif",
   textAlign: "center",
 };
